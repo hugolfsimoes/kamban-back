@@ -1,0 +1,31 @@
+# Node.js
+node_modules/
+dist/
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diretórios do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos do editor/IDE
+.vscode/
+.idea/
+*.swp
+
+# Migrations geradas automaticamente (opcional, caso use versionamento externo)
+src/database/migrations/
+
+# Arquivos do Knex (caso não queira versionar configurações locais)
+knexfile.ts
+knexfile.js
