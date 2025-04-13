@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import { prisma } from '../../../infrastructure/prisma';
 import { UserRole } from '../../../generated/prisma';
 import { signup as signupService } from '../services/signup';
+import { signin as signinService } from '../services/signin';
 
 
 
@@ -20,13 +21,13 @@ export default class AuthController {
     }
   }
 
-  /*  async login(req: Request, res: Response, next: NextFunction): Promise<void> {
-     try {
-       const { email, password } = req.body;
-       const result = await this.authService.login({ email, password });
-       res.status(200).json(result);
-     } catch (error) {
-       next(error);
-     }
-   } */
+  async signin(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { email, password } = req.body;
+      const result = await signinService({ email, password });
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

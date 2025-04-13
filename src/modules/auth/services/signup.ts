@@ -2,10 +2,12 @@
 import { prisma } from '../../../infrastructure/prisma';
 
 import { CreateOrganizationUseCase } from '../../../modules/organization/usecases/CreateOrganizationUseCase';
-import { CreateUserUseCase } from '../../../modules/user/usecases/CreateUserUseCase';
 import { UserRole } from '@prisma/client';
 import { PrismaOrganizationRepository } from '../../organization/repositories/prisma/PrismaOrganizationRepository';
 import { PrismaUserRepository } from '../../user/repositories/prisma/PrismaUserRepository';
+import { CreateUserUseCase } from '../../user/usecases/CreateUserUseCase';
+import jwt from 'jsonwebtoken';
+import { signToken } from '../../../shared/adapters/jwtAdapter';
 
 export interface SignupInput {
   name: string;
@@ -32,6 +34,8 @@ export const signup = async (data: SignupInput): Promise<any> => {
       organizationId: organization.id,
     });
 
-    return user;
+    const token = signToken({ userId: user.id, role: user.role });
+
+    return { user, token };
   });
 };
