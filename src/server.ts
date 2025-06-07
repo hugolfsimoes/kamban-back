@@ -19,9 +19,9 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err);
-  res.status(500).json({ error: err.message });
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  const status = err.statusCode || 500;
+  res.status(status).json({ error: err.message });
 });
 
 const PORT = process.env.PORT || 3000;

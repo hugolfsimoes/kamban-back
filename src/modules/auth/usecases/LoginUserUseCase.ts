@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User } from '../../user/entities/User';
 import { IUserRepository } from '../../user/repositories/IUserRepository';
+import { UnauthorizedError } from '../error/UnauthorizedError';
 
 
 export interface LoginUserInput {
@@ -11,7 +12,7 @@ export interface LoginUserInput {
 }
 
 export interface LoginUserOutput {
-  user: User;
+  user: Omit<User, 'password'>;
   token: string;
 }
 
@@ -22,22 +23,26 @@ export class LoginUserUseCase {
 
     const user = await this.userRepo.findByEmail(data.email);
     if (!user) {
-      throw new Error('Invalid credentials');
+      throw new UnauthorizedError();
     }
 
 
     const isMatch = await bcrypt.compare(data.password, user.password);
     if (!isMatch) {
-      throw new Error('Invalid credentials');
+      throw new UnauthorizedError();
     }
 
-
     const token = jwt.sign(
-      { userId: user.id, role: user.role },
-      process.env.JWT_SECRET || 'defaultSecret',
+      {
+        sub: user.id,
+        role: user.role,
+      },
+      process.env.JWT_SECRET!,
       { expiresIn: '24h' }
     );
 
-    return { user, token };
+    const { password, ...userWithoutPassword } = user;
+
+    return { user: userWithoutPassword, token };
   }
 }
