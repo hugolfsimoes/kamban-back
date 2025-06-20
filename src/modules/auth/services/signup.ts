@@ -17,6 +17,8 @@ export interface SignupInput {
 }
 
 export const signup = async (data: SignupInput): Promise<any> => {
+  console.log('aaaaa');
+
   return prisma.$transaction(async tx => {
 
     const organizationRepo = new PrismaOrganizationRepository(tx);
