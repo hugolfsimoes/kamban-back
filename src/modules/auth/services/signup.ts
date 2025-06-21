@@ -36,7 +36,7 @@ export const signup = async (data: SignupInput): Promise<any> => {
       organizationId: organization.id,
     });
 
-    const token = signToken({ userId: user.id, role: user.role });
+    const token = signToken({ userId: user.id, role: user.role, organizationId: user.organizationId });
 
     return { user, token };
   });

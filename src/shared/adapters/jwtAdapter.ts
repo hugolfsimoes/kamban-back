@@ -6,6 +6,7 @@ const SECRET = process.env.JWT_SECRET || 'defaultSecret';
 export interface TokenPayload extends JwtPayload {
   userId: string;
   role?: string;
+  organizationId: string;
 }
 
 export function signToken(payload: TokenPayload): string {

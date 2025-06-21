@@ -10,7 +10,7 @@ export interface SigninInput {
 }
 
 export const signin = async (data: SigninInput): Promise<any> => {
-  console.log(data);
+
 
   return prisma.$transaction(async tx => {
 
