@@ -13,7 +13,7 @@ export default class BoardController {
       const { organizationId } = req.user!;
       const boards = await listBoardsService(organizationId);
 
-      res.status(200).json({ boards }); // ✅ boards está tipado aqui
+      res.status(200).json({ boards });
     } catch (error) {
       next(error);
     }
