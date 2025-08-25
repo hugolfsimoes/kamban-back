@@ -135,11 +135,20 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ProjectScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  organizationId: 'organizationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.BoardScalarFieldEnum = {
   id: 'id',
   name: 'name',
   color: 'color',
   organizationId: 'organizationId',
+  projectId: 'projectId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -186,6 +195,7 @@ exports.UserRole = exports.$Enums.UserRole = {
 exports.Prisma.ModelName = {
   Organization: 'Organization',
   User: 'User',
+  Project: 'Project',
   Board: 'Board',
   Column: 'Column',
   Card: 'Card'

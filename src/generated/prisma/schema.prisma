@@ -14,12 +14,13 @@ enum UserRole {
 }
 
 model Organization {
-  id        String   @id @default(uuid()) @db.Uuid
-  name      String   @unique
+  id        String    @id @default(uuid()) @db.Uuid
+  name      String    @unique
   users     User[]
+  projects  Project[] // <-- ADICIONADO
   boards    Board[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model User {
@@ -31,7 +32,18 @@ model User {
   organizationId String       @db.Uuid
   organization   Organization @relation(fields: [organizationId], references: [id])
   createdCards   Card[]       @relation("CardCreator")
+  assignedCards  Card[]       @relation("CardAssignees") // <-- ADICIONADO
   boards         Board[]      @relation("BoardMembers")
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model Project {
+  id             String       @id @default(uuid()) @db.Uuid
+  name           String
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  boards         Board[] // <-- ADICIONADO
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 }
@@ -42,6 +54,8 @@ model Board {
   color          String
   organizationId String       @db.Uuid
   organization   Organization @relation(fields: [organizationId], references: [id])
+  projectId      String       @db.Uuid
+  project        Project      @relation(fields: [projectId], references: [id], onDelete: Cascade) // <-- AJUSTADO
   columns        Column[]
   members        User[]       @relation("BoardMembers")
   createdAt      DateTime     @default(now())
@@ -53,7 +67,7 @@ model Column {
   title     String
   boardId   String   @db.Uuid
   position  Int
-  board     Board    @relation(fields: [boardId], references: [id])
+  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade) // <-- AJUSTADO
   cards     Card[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -66,8 +80,9 @@ model Card {
   columnId    String   @db.Uuid
   position    Int
   creatorId   String   @db.Uuid
-  column      Column   @relation(fields: [columnId], references: [id])
+  column      Column   @relation(fields: [columnId], references: [id], onDelete: Cascade) // <-- AJUSTADO
   creator     User     @relation("CardCreator", fields: [creatorId], references: [id])
+  assignees   User[]   @relation("CardAssignees") // <-- ADICIONADO
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
