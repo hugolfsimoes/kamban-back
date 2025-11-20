@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
+
 import jwt from 'jsonwebtoken';
 import { prisma } from '../../../infrastructure/prisma';
 import { UserRole } from '../../../generated/prisma';
@@ -25,6 +26,8 @@ export default class AuthController {
     try {
       const { email, password } = req.body;
       const result = await signinService({ email, password });
+      console.log(result);
+      
       res.status(200).json(result);
     } catch (error) {
       next(error);

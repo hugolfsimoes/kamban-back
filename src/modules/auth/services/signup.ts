@@ -2,12 +2,13 @@
 import { prisma } from '../../../infrastructure/prisma';
 
 import { CreateOrganizationUseCase } from '../../../modules/organization/usecases/CreateOrganizationUseCase';
-import { UserRole } from '@prisma/client';
+
 import { PrismaOrganizationRepository } from '../../organization/repositories/prisma/PrismaOrganizationRepository';
 import { PrismaUserRepository } from '../../user/repositories/prisma/PrismaUserRepository';
 import { CreateUserUseCase } from '../../user/usecases/CreateUserUseCase';
 import jwt from 'jsonwebtoken';
 import { signToken } from '../../../shared/adapters/jwtAdapter';
+import { UserRole } from '../../../generated/prisma';
 
 export interface SignupInput {
   name: string;
@@ -17,7 +18,7 @@ export interface SignupInput {
 }
 
 export const signup = async (data: SignupInput): Promise<any> => {
-  console.log('aaaaa');
+  
 
   return prisma.$transaction(async tx => {
 

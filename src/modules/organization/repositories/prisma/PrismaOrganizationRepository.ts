@@ -1,7 +1,7 @@
 
-import { Prisma, PrismaClient } from '@prisma/client';
 import { IOrganizationRepository } from '../IOrganizationRepository';
 import { Organization } from '../../entities/Organization';
+import { Prisma, PrismaClient } from '../../../../generated/prisma';
 
 export class PrismaOrganizationRepository implements IOrganizationRepository {
   constructor(private prisma: PrismaClient | Prisma.TransactionClient) {}

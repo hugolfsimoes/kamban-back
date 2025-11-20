@@ -1,9 +1,8 @@
 
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { IUserRepository } from '../../../modules/user/repositories/IUserRepository';
 import { IOrganizationRepository } from '../../organization/repositories/IOrganizationRepository';
-import { UserRole } from '@prisma/client';
 import { Organization } from '../entities/Organization';
 
 export interface CreateOrganizationInput {

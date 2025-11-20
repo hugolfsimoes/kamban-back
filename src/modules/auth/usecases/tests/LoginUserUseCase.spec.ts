@@ -2,8 +2,10 @@
 import { LoginUserUseCase, LoginUserInput } from '../LoginUserUseCase';
 import { IUserRepository } from '../../../user/repositories/IUserRepository';
 import { User } from '../../../user/entities/User';
-import { UserRole } from '@prisma/client';
-import bcrypt from 'bcrypt';
+
+import bcrypt from 'bcryptjs';
+
+import { UserRole } from '../../../../generated/prisma';
 
 const mockUserRepo: jest.Mocked<IUserRepository> = {
   findByEmail: jest.fn(),

@@ -1,5 +1,5 @@
-// src/modules/board/repositories/prisma/PrismaBoardRepository.ts
-import { PrismaClient } from '@prisma/client';
+
+import { PrismaClient } from '../../../../generated/prisma';
 import { IProjectRepository, ProjectDTO } from '../IProjectRepository';
 
 export class PrismaProjectRepository implements IProjectRepository {

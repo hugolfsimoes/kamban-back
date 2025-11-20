@@ -1,7 +1,8 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { IUserRepository } from '../../../modules/user/repositories/IUserRepository';
 import { User } from '../../../modules/user/entities/User';
-import { UserRole } from '@prisma/client';
+import { UserRole } from '../../../generated/prisma';
+
 
 export interface CreateUserInput {
   name: string;

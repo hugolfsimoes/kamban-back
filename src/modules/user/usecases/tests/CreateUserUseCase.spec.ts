@@ -1,7 +1,8 @@
 import { CreateUserUseCase, CreateUserInput } from '../CreateUserUseCase';
 import { IUserRepository } from '../../repositories/IUserRepository';
 import { User } from '../../entities/User';
-import { UserRole } from '@prisma/client';
+import { UserRole } from '../../../../generated/prisma';
+
 
 
 const mockUserRepo: jest.Mocked<IUserRepository> = {
