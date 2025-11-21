@@ -2,6 +2,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { AuthRequest } from '../../auth/middleware/authMiddleware';
 import { listBoardsService } from '../services/listBoards';
+import { createBoardService } from '../services/createBoardService';
 
 export default class BoardController {
   async list(
@@ -28,9 +29,25 @@ export default class BoardController {
     }
   }
 
-  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async create(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      res.status(201).json({ message: 'Board created' });
+      const { name, color } = req.body;
+      
+      
+      const { organizationId } = req.user!;
+
+      if (!name || !color) {
+        res.status(400).json({ error: 'Missing required fields: name, color' });
+        return;
+      }
+
+      const board = await createBoardService({
+        name,
+        color,
+        organizationId,
+      });
+
+      res.status(201).json({ board });
     } catch (error) {
       next(error);
     }

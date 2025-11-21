@@ -1,20 +1,12 @@
 
-import { IBoardRepository } from '../repositories/IBoardRepository';
-
-interface CreateBoardInput {
-  organizationId: string;
-  name: string;
-}
-
-interface BoardDTO {
-  id: string;
-  name: string;
-}
+import { IBoardRepository, CreateBoardInput, BoardDTO } from '../repositories/IBoardRepository';
 
 export class CreateBoardUseCase {
   constructor(private boardRepo: IBoardRepository) {}
 
-  async execute({ organizationId }: CreateBoardInput): Promise<BoardDTO[]> {
-    return this.boardRepo.findManyByOrganization(organizationId);
+  async execute(input: CreateBoardInput): Promise<BoardDTO> {
+ 
+    
+    return this.boardRepo.create(input);
   }
 }

@@ -24,11 +24,6 @@ export type Organization = $Result.DefaultSelection<Prisma.$OrganizationPayload>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
- * Model Project
- * 
- */
-export type Project = $Result.DefaultSelection<Prisma.$ProjectPayload>
-/**
  * Model Board
  * 
  */
@@ -198,16 +193,6 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.project`: Exposes CRUD operations for the **Project** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Projects
-    * const projects = await prisma.project.findMany()
-    * ```
-    */
-  get project(): Prisma.ProjectDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.board`: Exposes CRUD operations for the **Board** model.
@@ -681,7 +666,6 @@ export namespace Prisma {
   export const ModelName: {
     Organization: 'Organization',
     User: 'User',
-    Project: 'Project',
     Board: 'Board',
     Column: 'Column',
     Card: 'Card'
@@ -703,7 +687,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "organization" | "user" | "project" | "board" | "column" | "card"
+      modelProps: "organization" | "user" | "board" | "column" | "card"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -852,80 +836,6 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
-          }
-        }
-      }
-      Project: {
-        payload: Prisma.$ProjectPayload<ExtArgs>
-        fields: Prisma.ProjectFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ProjectFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ProjectFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
-          }
-          findFirst: {
-            args: Prisma.ProjectFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ProjectFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
-          }
-          findMany: {
-            args: Prisma.ProjectFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>[]
-          }
-          create: {
-            args: Prisma.ProjectCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
-          }
-          createMany: {
-            args: Prisma.ProjectCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ProjectCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>[]
-          }
-          delete: {
-            args: Prisma.ProjectDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
-          }
-          update: {
-            args: Prisma.ProjectUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
-          }
-          deleteMany: {
-            args: Prisma.ProjectDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ProjectUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.ProjectUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>[]
-          }
-          upsert: {
-            args: Prisma.ProjectUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
-          }
-          aggregate: {
-            args: Prisma.ProjectAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateProject>
-          }
-          groupBy: {
-            args: Prisma.ProjectGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ProjectGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ProjectCountArgs<ExtArgs>
-            result: $Utils.Optional<ProjectCountAggregateOutputType> | number
           }
         }
       }
@@ -1249,7 +1159,6 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     organization?: OrganizationOmit
     user?: UserOmit
-    project?: ProjectOmit
     board?: BoardOmit
     column?: ColumnOmit
     card?: CardOmit
@@ -1334,13 +1243,11 @@ export namespace Prisma {
 
   export type OrganizationCountOutputType = {
     users: number
-    projects: number
     boards: number
   }
 
   export type OrganizationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | OrganizationCountOutputTypeCountUsersArgs
-    projects?: boolean | OrganizationCountOutputTypeCountProjectsArgs
     boards?: boolean | OrganizationCountOutputTypeCountBoardsArgs
   }
 
@@ -1360,13 +1267,6 @@ export namespace Prisma {
    */
   export type OrganizationCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
-  }
-
-  /**
-   * OrganizationCountOutputType without action
-   */
-  export type OrganizationCountOutputTypeCountProjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProjectWhereInput
   }
 
   /**
@@ -1422,37 +1322,6 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountBoardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BoardWhereInput
-  }
-
-
-  /**
-   * Count Type ProjectCountOutputType
-   */
-
-  export type ProjectCountOutputType = {
-    boards: number
-  }
-
-  export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    boards?: boolean | ProjectCountOutputTypeCountBoardsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ProjectCountOutputType without action
-   */
-  export type ProjectCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProjectCountOutputType
-     */
-    select?: ProjectCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * ProjectCountOutputType without action
-   */
-  export type ProjectCountOutputTypeCountBoardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BoardWhereInput
   }
 
@@ -1720,7 +1589,6 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     users?: boolean | Organization$usersArgs<ExtArgs>
-    projects?: boolean | Organization$projectsArgs<ExtArgs>
     boards?: boolean | Organization$boardsArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organization"]>
@@ -1749,7 +1617,6 @@ export namespace Prisma {
   export type OrganizationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["organization"]>
   export type OrganizationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Organization$usersArgs<ExtArgs>
-    projects?: boolean | Organization$projectsArgs<ExtArgs>
     boards?: boolean | Organization$boardsArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -1760,7 +1627,6 @@ export namespace Prisma {
     name: "Organization"
     objects: {
       users: Prisma.$UserPayload<ExtArgs>[]
-      projects: Prisma.$ProjectPayload<ExtArgs>[]
       boards: Prisma.$BoardPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2163,7 +2029,6 @@ export namespace Prisma {
   export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     users<T extends Organization$usersArgs<ExtArgs> = {}>(args?: Subset<T, Organization$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    projects<T extends Organization$projectsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     boards<T extends Organization$boardsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$boardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2607,30 +2472,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
-
-  /**
-   * Organization.projects
-   */
-  export type Organization$projectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    where?: ProjectWhereInput
-    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
-    cursor?: ProjectWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ProjectScalarFieldEnum | ProjectScalarFieldEnum[]
   }
 
   /**
@@ -3860,1094 +3701,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Project
-   */
-
-  export type AggregateProject = {
-    _count: ProjectCountAggregateOutputType | null
-    _min: ProjectMinAggregateOutputType | null
-    _max: ProjectMaxAggregateOutputType | null
-  }
-
-  export type ProjectMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    organizationId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type ProjectMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    organizationId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type ProjectCountAggregateOutputType = {
-    id: number
-    name: number
-    organizationId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type ProjectMinAggregateInputType = {
-    id?: true
-    name?: true
-    organizationId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type ProjectMaxAggregateInputType = {
-    id?: true
-    name?: true
-    organizationId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type ProjectCountAggregateInputType = {
-    id?: true
-    name?: true
-    organizationId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type ProjectAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Project to aggregate.
-     */
-    where?: ProjectWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Projects to fetch.
-     */
-    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ProjectWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Projects from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Projects.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Projects
-    **/
-    _count?: true | ProjectCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ProjectMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ProjectMaxAggregateInputType
-  }
-
-  export type GetProjectAggregateType<T extends ProjectAggregateArgs> = {
-        [P in keyof T & keyof AggregateProject]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateProject[P]>
-      : GetScalarType<T[P], AggregateProject[P]>
-  }
-
-
-
-
-  export type ProjectGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProjectWhereInput
-    orderBy?: ProjectOrderByWithAggregationInput | ProjectOrderByWithAggregationInput[]
-    by: ProjectScalarFieldEnum[] | ProjectScalarFieldEnum
-    having?: ProjectScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ProjectCountAggregateInputType | true
-    _min?: ProjectMinAggregateInputType
-    _max?: ProjectMaxAggregateInputType
-  }
-
-  export type ProjectGroupByOutputType = {
-    id: string
-    name: string
-    organizationId: string
-    createdAt: Date
-    updatedAt: Date
-    _count: ProjectCountAggregateOutputType | null
-    _min: ProjectMinAggregateOutputType | null
-    _max: ProjectMaxAggregateOutputType | null
-  }
-
-  type GetProjectGroupByPayload<T extends ProjectGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ProjectGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ProjectGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ProjectGroupByOutputType[P]>
-            : GetScalarType<T[P], ProjectGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ProjectSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    organizationId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-    boards?: boolean | Project$boardsArgs<ExtArgs>
-    _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["project"]>
-
-  export type ProjectSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    organizationId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["project"]>
-
-  export type ProjectSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    organizationId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["project"]>
-
-  export type ProjectSelectScalar = {
-    id?: boolean
-    name?: boolean
-    organizationId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "organizationId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
-  export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-    boards?: boolean | Project$boardsArgs<ExtArgs>
-    _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type ProjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-  }
-  export type ProjectIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-  }
-
-  export type $ProjectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Project"
-    objects: {
-      organization: Prisma.$OrganizationPayload<ExtArgs>
-      boards: Prisma.$BoardPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      organizationId: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["project"]>
-    composites: {}
-  }
-
-  type ProjectGetPayload<S extends boolean | null | undefined | ProjectDefaultArgs> = $Result.GetResult<Prisma.$ProjectPayload, S>
-
-  type ProjectCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ProjectFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ProjectCountAggregateInputType | true
-    }
-
-  export interface ProjectDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Project'], meta: { name: 'Project' } }
-    /**
-     * Find zero or one Project that matches the filter.
-     * @param {ProjectFindUniqueArgs} args - Arguments to find a Project
-     * @example
-     * // Get one Project
-     * const project = await prisma.project.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ProjectFindUniqueArgs>(args: SelectSubset<T, ProjectFindUniqueArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Project that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ProjectFindUniqueOrThrowArgs} args - Arguments to find a Project
-     * @example
-     * // Get one Project
-     * const project = await prisma.project.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ProjectFindUniqueOrThrowArgs>(args: SelectSubset<T, ProjectFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Project that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectFindFirstArgs} args - Arguments to find a Project
-     * @example
-     * // Get one Project
-     * const project = await prisma.project.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ProjectFindFirstArgs>(args?: SelectSubset<T, ProjectFindFirstArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Project that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectFindFirstOrThrowArgs} args - Arguments to find a Project
-     * @example
-     * // Get one Project
-     * const project = await prisma.project.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ProjectFindFirstOrThrowArgs>(args?: SelectSubset<T, ProjectFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Projects that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Projects
-     * const projects = await prisma.project.findMany()
-     * 
-     * // Get first 10 Projects
-     * const projects = await prisma.project.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const projectWithIdOnly = await prisma.project.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ProjectFindManyArgs>(args?: SelectSubset<T, ProjectFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Project.
-     * @param {ProjectCreateArgs} args - Arguments to create a Project.
-     * @example
-     * // Create one Project
-     * const Project = await prisma.project.create({
-     *   data: {
-     *     // ... data to create a Project
-     *   }
-     * })
-     * 
-     */
-    create<T extends ProjectCreateArgs>(args: SelectSubset<T, ProjectCreateArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Projects.
-     * @param {ProjectCreateManyArgs} args - Arguments to create many Projects.
-     * @example
-     * // Create many Projects
-     * const project = await prisma.project.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ProjectCreateManyArgs>(args?: SelectSubset<T, ProjectCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Projects and returns the data saved in the database.
-     * @param {ProjectCreateManyAndReturnArgs} args - Arguments to create many Projects.
-     * @example
-     * // Create many Projects
-     * const project = await prisma.project.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Projects and only return the `id`
-     * const projectWithIdOnly = await prisma.project.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends ProjectCreateManyAndReturnArgs>(args?: SelectSubset<T, ProjectCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Project.
-     * @param {ProjectDeleteArgs} args - Arguments to delete one Project.
-     * @example
-     * // Delete one Project
-     * const Project = await prisma.project.delete({
-     *   where: {
-     *     // ... filter to delete one Project
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ProjectDeleteArgs>(args: SelectSubset<T, ProjectDeleteArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Project.
-     * @param {ProjectUpdateArgs} args - Arguments to update one Project.
-     * @example
-     * // Update one Project
-     * const project = await prisma.project.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ProjectUpdateArgs>(args: SelectSubset<T, ProjectUpdateArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Projects.
-     * @param {ProjectDeleteManyArgs} args - Arguments to filter Projects to delete.
-     * @example
-     * // Delete a few Projects
-     * const { count } = await prisma.project.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ProjectDeleteManyArgs>(args?: SelectSubset<T, ProjectDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Projects.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Projects
-     * const project = await prisma.project.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ProjectUpdateManyArgs>(args: SelectSubset<T, ProjectUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Projects and returns the data updated in the database.
-     * @param {ProjectUpdateManyAndReturnArgs} args - Arguments to update many Projects.
-     * @example
-     * // Update many Projects
-     * const project = await prisma.project.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Projects and only return the `id`
-     * const projectWithIdOnly = await prisma.project.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends ProjectUpdateManyAndReturnArgs>(args: SelectSubset<T, ProjectUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Project.
-     * @param {ProjectUpsertArgs} args - Arguments to update or create a Project.
-     * @example
-     * // Update or create a Project
-     * const project = await prisma.project.upsert({
-     *   create: {
-     *     // ... data to create a Project
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Project we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ProjectUpsertArgs>(args: SelectSubset<T, ProjectUpsertArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Projects.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectCountArgs} args - Arguments to filter Projects to count.
-     * @example
-     * // Count the number of Projects
-     * const count = await prisma.project.count({
-     *   where: {
-     *     // ... the filter for the Projects we want to count
-     *   }
-     * })
-    **/
-    count<T extends ProjectCountArgs>(
-      args?: Subset<T, ProjectCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ProjectCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Project.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ProjectAggregateArgs>(args: Subset<T, ProjectAggregateArgs>): Prisma.PrismaPromise<GetProjectAggregateType<T>>
-
-    /**
-     * Group by Project.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProjectGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ProjectGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ProjectGroupByArgs['orderBy'] }
-        : { orderBy?: ProjectGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ProjectGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProjectGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Project model
-   */
-  readonly fields: ProjectFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Project.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    boards<T extends Project$boardsArgs<ExtArgs> = {}>(args?: Subset<T, Project$boardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Project model
-   */
-  interface ProjectFieldRefs {
-    readonly id: FieldRef<"Project", 'String'>
-    readonly name: FieldRef<"Project", 'String'>
-    readonly organizationId: FieldRef<"Project", 'String'>
-    readonly createdAt: FieldRef<"Project", 'DateTime'>
-    readonly updatedAt: FieldRef<"Project", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Project findUnique
-   */
-  export type ProjectFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * Filter, which Project to fetch.
-     */
-    where: ProjectWhereUniqueInput
-  }
-
-  /**
-   * Project findUniqueOrThrow
-   */
-  export type ProjectFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * Filter, which Project to fetch.
-     */
-    where: ProjectWhereUniqueInput
-  }
-
-  /**
-   * Project findFirst
-   */
-  export type ProjectFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * Filter, which Project to fetch.
-     */
-    where?: ProjectWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Projects to fetch.
-     */
-    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Projects.
-     */
-    cursor?: ProjectWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Projects from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Projects.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Projects.
-     */
-    distinct?: ProjectScalarFieldEnum | ProjectScalarFieldEnum[]
-  }
-
-  /**
-   * Project findFirstOrThrow
-   */
-  export type ProjectFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * Filter, which Project to fetch.
-     */
-    where?: ProjectWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Projects to fetch.
-     */
-    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Projects.
-     */
-    cursor?: ProjectWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Projects from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Projects.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Projects.
-     */
-    distinct?: ProjectScalarFieldEnum | ProjectScalarFieldEnum[]
-  }
-
-  /**
-   * Project findMany
-   */
-  export type ProjectFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * Filter, which Projects to fetch.
-     */
-    where?: ProjectWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Projects to fetch.
-     */
-    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Projects.
-     */
-    cursor?: ProjectWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Projects from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Projects.
-     */
-    skip?: number
-    distinct?: ProjectScalarFieldEnum | ProjectScalarFieldEnum[]
-  }
-
-  /**
-   * Project create
-   */
-  export type ProjectCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Project.
-     */
-    data: XOR<ProjectCreateInput, ProjectUncheckedCreateInput>
-  }
-
-  /**
-   * Project createMany
-   */
-  export type ProjectCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Projects.
-     */
-    data: ProjectCreateManyInput | ProjectCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Project createManyAndReturn
-   */
-  export type ProjectCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * The data used to create many Projects.
-     */
-    data: ProjectCreateManyInput | ProjectCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Project update
-   */
-  export type ProjectUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Project.
-     */
-    data: XOR<ProjectUpdateInput, ProjectUncheckedUpdateInput>
-    /**
-     * Choose, which Project to update.
-     */
-    where: ProjectWhereUniqueInput
-  }
-
-  /**
-   * Project updateMany
-   */
-  export type ProjectUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Projects.
-     */
-    data: XOR<ProjectUpdateManyMutationInput, ProjectUncheckedUpdateManyInput>
-    /**
-     * Filter which Projects to update
-     */
-    where?: ProjectWhereInput
-    /**
-     * Limit how many Projects to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Project updateManyAndReturn
-   */
-  export type ProjectUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * The data used to update Projects.
-     */
-    data: XOR<ProjectUpdateManyMutationInput, ProjectUncheckedUpdateManyInput>
-    /**
-     * Filter which Projects to update
-     */
-    where?: ProjectWhereInput
-    /**
-     * Limit how many Projects to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Project upsert
-   */
-  export type ProjectUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Project to update in case it exists.
-     */
-    where: ProjectWhereUniqueInput
-    /**
-     * In case the Project found by the `where` argument doesn't exist, create a new Project with this data.
-     */
-    create: XOR<ProjectCreateInput, ProjectUncheckedCreateInput>
-    /**
-     * In case the Project was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ProjectUpdateInput, ProjectUncheckedUpdateInput>
-  }
-
-  /**
-   * Project delete
-   */
-  export type ProjectDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    /**
-     * Filter which Project to delete.
-     */
-    where: ProjectWhereUniqueInput
-  }
-
-  /**
-   * Project deleteMany
-   */
-  export type ProjectDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Projects to delete
-     */
-    where?: ProjectWhereInput
-    /**
-     * Limit how many Projects to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Project.boards
-   */
-  export type Project$boardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Board
-     */
-    select?: BoardSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Board
-     */
-    omit?: BoardOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardInclude<ExtArgs> | null
-    where?: BoardWhereInput
-    orderBy?: BoardOrderByWithRelationInput | BoardOrderByWithRelationInput[]
-    cursor?: BoardWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BoardScalarFieldEnum | BoardScalarFieldEnum[]
-  }
-
-  /**
-   * Project without action
-   */
-  export type ProjectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Board
    */
 
@@ -4962,7 +3715,6 @@ export namespace Prisma {
     name: string | null
     color: string | null
     organizationId: string | null
-    projectId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4972,7 +3724,6 @@ export namespace Prisma {
     name: string | null
     color: string | null
     organizationId: string | null
-    projectId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4982,7 +3733,6 @@ export namespace Prisma {
     name: number
     color: number
     organizationId: number
-    projectId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4994,7 +3744,6 @@ export namespace Prisma {
     name?: true
     color?: true
     organizationId?: true
-    projectId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5004,7 +3753,6 @@ export namespace Prisma {
     name?: true
     color?: true
     organizationId?: true
-    projectId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5014,7 +3762,6 @@ export namespace Prisma {
     name?: true
     color?: true
     organizationId?: true
-    projectId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5097,7 +3844,6 @@ export namespace Prisma {
     name: string
     color: string
     organizationId: string
-    projectId: string
     createdAt: Date
     updatedAt: Date
     _count: BoardCountAggregateOutputType | null
@@ -5124,11 +3870,9 @@ export namespace Prisma {
     name?: boolean
     color?: boolean
     organizationId?: boolean
-    projectId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
     columns?: boolean | Board$columnsArgs<ExtArgs>
     members?: boolean | Board$membersArgs<ExtArgs>
     _count?: boolean | BoardCountOutputTypeDefaultArgs<ExtArgs>
@@ -5139,11 +3883,9 @@ export namespace Prisma {
     name?: boolean
     color?: boolean
     organizationId?: boolean
-    projectId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["board"]>
 
   export type BoardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5151,11 +3893,9 @@ export namespace Prisma {
     name?: boolean
     color?: boolean
     organizationId?: boolean
-    projectId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["board"]>
 
   export type BoardSelectScalar = {
@@ -5163,33 +3903,28 @@ export namespace Prisma {
     name?: boolean
     color?: boolean
     organizationId?: boolean
-    projectId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type BoardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "color" | "organizationId" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["board"]>
+  export type BoardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "color" | "organizationId" | "createdAt" | "updatedAt", ExtArgs["result"]["board"]>
   export type BoardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
     columns?: boolean | Board$columnsArgs<ExtArgs>
     members?: boolean | Board$membersArgs<ExtArgs>
     _count?: boolean | BoardCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type BoardIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
   }
   export type BoardIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     organization?: boolean | OrganizationDefaultArgs<ExtArgs>
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
   }
 
   export type $BoardPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Board"
     objects: {
       organization: Prisma.$OrganizationPayload<ExtArgs>
-      project: Prisma.$ProjectPayload<ExtArgs>
       columns: Prisma.$ColumnPayload<ExtArgs>[]
       members: Prisma.$UserPayload<ExtArgs>[]
     }
@@ -5198,7 +3933,6 @@ export namespace Prisma {
       name: string
       color: string
       organizationId: string
-      projectId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["board"]>
@@ -5596,7 +4330,6 @@ export namespace Prisma {
   export interface Prisma__BoardClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     columns<T extends Board$columnsArgs<ExtArgs> = {}>(args?: Subset<T, Board$columnsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ColumnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     members<T extends Board$membersArgs<ExtArgs> = {}>(args?: Subset<T, Board$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -5632,7 +4365,6 @@ export namespace Prisma {
     readonly name: FieldRef<"Board", 'String'>
     readonly color: FieldRef<"Board", 'String'>
     readonly organizationId: FieldRef<"Board", 'String'>
-    readonly projectId: FieldRef<"Board", 'String'>
     readonly createdAt: FieldRef<"Board", 'DateTime'>
     readonly updatedAt: FieldRef<"Board", 'DateTime'>
   }
@@ -8439,23 +7171,11 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-  export const ProjectScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    organizationId: 'organizationId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
-
-
   export const BoardScalarFieldEnum: {
     id: 'id',
     name: 'name',
     color: 'color',
     organizationId: 'organizationId',
-    projectId: 'projectId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -8600,7 +7320,6 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Organization"> | Date | string
     updatedAt?: DateTimeFilter<"Organization"> | Date | string
     users?: UserListRelationFilter
-    projects?: ProjectListRelationFilter
     boards?: BoardListRelationFilter
   }
 
@@ -8610,7 +7329,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     users?: UserOrderByRelationAggregateInput
-    projects?: ProjectOrderByRelationAggregateInput
     boards?: BoardOrderByRelationAggregateInput
   }
 
@@ -8623,7 +7341,6 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Organization"> | Date | string
     updatedAt?: DateTimeFilter<"Organization"> | Date | string
     users?: UserListRelationFilter
-    projects?: ProjectListRelationFilter
     boards?: BoardListRelationFilter
   }, "id" | "name">
 
@@ -8726,64 +7443,6 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
-  export type ProjectWhereInput = {
-    AND?: ProjectWhereInput | ProjectWhereInput[]
-    OR?: ProjectWhereInput[]
-    NOT?: ProjectWhereInput | ProjectWhereInput[]
-    id?: UuidFilter<"Project"> | string
-    name?: StringFilter<"Project"> | string
-    organizationId?: UuidFilter<"Project"> | string
-    createdAt?: DateTimeFilter<"Project"> | Date | string
-    updatedAt?: DateTimeFilter<"Project"> | Date | string
-    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
-    boards?: BoardListRelationFilter
-  }
-
-  export type ProjectOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    organizationId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    organization?: OrganizationOrderByWithRelationInput
-    boards?: BoardOrderByRelationAggregateInput
-  }
-
-  export type ProjectWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: ProjectWhereInput | ProjectWhereInput[]
-    OR?: ProjectWhereInput[]
-    NOT?: ProjectWhereInput | ProjectWhereInput[]
-    name?: StringFilter<"Project"> | string
-    organizationId?: UuidFilter<"Project"> | string
-    createdAt?: DateTimeFilter<"Project"> | Date | string
-    updatedAt?: DateTimeFilter<"Project"> | Date | string
-    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
-    boards?: BoardListRelationFilter
-  }, "id">
-
-  export type ProjectOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    organizationId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: ProjectCountOrderByAggregateInput
-    _max?: ProjectMaxOrderByAggregateInput
-    _min?: ProjectMinOrderByAggregateInput
-  }
-
-  export type ProjectScalarWhereWithAggregatesInput = {
-    AND?: ProjectScalarWhereWithAggregatesInput | ProjectScalarWhereWithAggregatesInput[]
-    OR?: ProjectScalarWhereWithAggregatesInput[]
-    NOT?: ProjectScalarWhereWithAggregatesInput | ProjectScalarWhereWithAggregatesInput[]
-    id?: UuidWithAggregatesFilter<"Project"> | string
-    name?: StringWithAggregatesFilter<"Project"> | string
-    organizationId?: UuidWithAggregatesFilter<"Project"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
-  }
-
   export type BoardWhereInput = {
     AND?: BoardWhereInput | BoardWhereInput[]
     OR?: BoardWhereInput[]
@@ -8792,11 +7451,9 @@ export namespace Prisma {
     name?: StringFilter<"Board"> | string
     color?: StringFilter<"Board"> | string
     organizationId?: UuidFilter<"Board"> | string
-    projectId?: UuidFilter<"Board"> | string
     createdAt?: DateTimeFilter<"Board"> | Date | string
     updatedAt?: DateTimeFilter<"Board"> | Date | string
     organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
-    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     columns?: ColumnListRelationFilter
     members?: UserListRelationFilter
   }
@@ -8806,11 +7463,9 @@ export namespace Prisma {
     name?: SortOrder
     color?: SortOrder
     organizationId?: SortOrder
-    projectId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     organization?: OrganizationOrderByWithRelationInput
-    project?: ProjectOrderByWithRelationInput
     columns?: ColumnOrderByRelationAggregateInput
     members?: UserOrderByRelationAggregateInput
   }
@@ -8823,11 +7478,9 @@ export namespace Prisma {
     name?: StringFilter<"Board"> | string
     color?: StringFilter<"Board"> | string
     organizationId?: UuidFilter<"Board"> | string
-    projectId?: UuidFilter<"Board"> | string
     createdAt?: DateTimeFilter<"Board"> | Date | string
     updatedAt?: DateTimeFilter<"Board"> | Date | string
     organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
-    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     columns?: ColumnListRelationFilter
     members?: UserListRelationFilter
   }, "id">
@@ -8837,7 +7490,6 @@ export namespace Prisma {
     name?: SortOrder
     color?: SortOrder
     organizationId?: SortOrder
-    projectId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: BoardCountOrderByAggregateInput
@@ -8853,7 +7505,6 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Board"> | string
     color?: StringWithAggregatesFilter<"Board"> | string
     organizationId?: UuidWithAggregatesFilter<"Board"> | string
-    projectId?: UuidWithAggregatesFilter<"Board"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Board"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Board"> | Date | string
   }
@@ -9007,7 +7658,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutOrganizationInput
-    projects?: ProjectCreateNestedManyWithoutOrganizationInput
     boards?: BoardCreateNestedManyWithoutOrganizationInput
   }
 
@@ -9017,7 +7667,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
-    projects?: ProjectUncheckedCreateNestedManyWithoutOrganizationInput
     boards?: BoardUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
@@ -9027,7 +7676,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutOrganizationNestedInput
-    projects?: ProjectUpdateManyWithoutOrganizationNestedInput
     boards?: BoardUpdateManyWithoutOrganizationNestedInput
   }
 
@@ -9037,7 +7685,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
-    projects?: ProjectUncheckedUpdateManyWithoutOrganizationNestedInput
     boards?: BoardUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
@@ -9150,65 +7797,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProjectCreateInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    organization: OrganizationCreateNestedOneWithoutProjectsInput
-    boards?: BoardCreateNestedManyWithoutProjectInput
-  }
-
-  export type ProjectUncheckedCreateInput = {
-    id?: string
-    name: string
-    organizationId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    boards?: BoardUncheckedCreateNestedManyWithoutProjectInput
-  }
-
-  export type ProjectUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    organization?: OrganizationUpdateOneRequiredWithoutProjectsNestedInput
-    boards?: BoardUpdateManyWithoutProjectNestedInput
-  }
-
-  export type ProjectUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    organizationId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    boards?: BoardUncheckedUpdateManyWithoutProjectNestedInput
-  }
-
-  export type ProjectCreateManyInput = {
-    id?: string
-    name: string
-    organizationId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ProjectUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ProjectUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    organizationId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type BoardCreateInput = {
     id?: string
     name: string
@@ -9216,7 +7804,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     organization: OrganizationCreateNestedOneWithoutBoardsInput
-    project: ProjectCreateNestedOneWithoutBoardsInput
     columns?: ColumnCreateNestedManyWithoutBoardInput
     members?: UserCreateNestedManyWithoutBoardsInput
   }
@@ -9226,7 +7813,6 @@ export namespace Prisma {
     name: string
     color: string
     organizationId: string
-    projectId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     columns?: ColumnUncheckedCreateNestedManyWithoutBoardInput
@@ -9240,7 +7826,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organization?: OrganizationUpdateOneRequiredWithoutBoardsNestedInput
-    project?: ProjectUpdateOneRequiredWithoutBoardsNestedInput
     columns?: ColumnUpdateManyWithoutBoardNestedInput
     members?: UserUpdateManyWithoutBoardsNestedInput
   }
@@ -9250,7 +7835,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     organizationId?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     columns?: ColumnUncheckedUpdateManyWithoutBoardNestedInput
@@ -9262,7 +7846,6 @@ export namespace Prisma {
     name: string
     color: string
     organizationId: string
-    projectId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9280,7 +7863,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     organizationId?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9474,12 +8056,6 @@ export namespace Prisma {
     none?: UserWhereInput
   }
 
-  export type ProjectListRelationFilter = {
-    every?: ProjectWhereInput
-    some?: ProjectWhereInput
-    none?: ProjectWhereInput
-  }
-
   export type BoardListRelationFilter = {
     every?: BoardWhereInput
     some?: BoardWhereInput
@@ -9487,10 +8063,6 @@ export namespace Prisma {
   }
 
   export type UserOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ProjectOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9631,35 +8203,6 @@ export namespace Prisma {
     _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
-  export type ProjectCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    organizationId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ProjectMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    organizationId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ProjectMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    organizationId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ProjectScalarRelationFilter = {
-    is?: ProjectWhereInput
-    isNot?: ProjectWhereInput
-  }
-
   export type ColumnListRelationFilter = {
     every?: ColumnWhereInput
     some?: ColumnWhereInput
@@ -9675,7 +8218,6 @@ export namespace Prisma {
     name?: SortOrder
     color?: SortOrder
     organizationId?: SortOrder
-    projectId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9685,7 +8227,6 @@ export namespace Prisma {
     name?: SortOrder
     color?: SortOrder
     organizationId?: SortOrder
-    projectId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9695,7 +8236,6 @@ export namespace Prisma {
     name?: SortOrder
     color?: SortOrder
     organizationId?: SortOrder
-    projectId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9863,13 +8403,6 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
-  export type ProjectCreateNestedManyWithoutOrganizationInput = {
-    create?: XOR<ProjectCreateWithoutOrganizationInput, ProjectUncheckedCreateWithoutOrganizationInput> | ProjectCreateWithoutOrganizationInput[] | ProjectUncheckedCreateWithoutOrganizationInput[]
-    connectOrCreate?: ProjectCreateOrConnectWithoutOrganizationInput | ProjectCreateOrConnectWithoutOrganizationInput[]
-    createMany?: ProjectCreateManyOrganizationInputEnvelope
-    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-  }
-
   export type BoardCreateNestedManyWithoutOrganizationInput = {
     create?: XOR<BoardCreateWithoutOrganizationInput, BoardUncheckedCreateWithoutOrganizationInput> | BoardCreateWithoutOrganizationInput[] | BoardUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: BoardCreateOrConnectWithoutOrganizationInput | BoardCreateOrConnectWithoutOrganizationInput[]
@@ -9882,13 +8415,6 @@ export namespace Prisma {
     connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput | UserCreateOrConnectWithoutOrganizationInput[]
     createMany?: UserCreateManyOrganizationInputEnvelope
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-  }
-
-  export type ProjectUncheckedCreateNestedManyWithoutOrganizationInput = {
-    create?: XOR<ProjectCreateWithoutOrganizationInput, ProjectUncheckedCreateWithoutOrganizationInput> | ProjectCreateWithoutOrganizationInput[] | ProjectUncheckedCreateWithoutOrganizationInput[]
-    connectOrCreate?: ProjectCreateOrConnectWithoutOrganizationInput | ProjectCreateOrConnectWithoutOrganizationInput[]
-    createMany?: ProjectCreateManyOrganizationInputEnvelope
-    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
   }
 
   export type BoardUncheckedCreateNestedManyWithoutOrganizationInput = {
@@ -9920,20 +8446,6 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
-  export type ProjectUpdateManyWithoutOrganizationNestedInput = {
-    create?: XOR<ProjectCreateWithoutOrganizationInput, ProjectUncheckedCreateWithoutOrganizationInput> | ProjectCreateWithoutOrganizationInput[] | ProjectUncheckedCreateWithoutOrganizationInput[]
-    connectOrCreate?: ProjectCreateOrConnectWithoutOrganizationInput | ProjectCreateOrConnectWithoutOrganizationInput[]
-    upsert?: ProjectUpsertWithWhereUniqueWithoutOrganizationInput | ProjectUpsertWithWhereUniqueWithoutOrganizationInput[]
-    createMany?: ProjectCreateManyOrganizationInputEnvelope
-    set?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    disconnect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    delete?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    update?: ProjectUpdateWithWhereUniqueWithoutOrganizationInput | ProjectUpdateWithWhereUniqueWithoutOrganizationInput[]
-    updateMany?: ProjectUpdateManyWithWhereWithoutOrganizationInput | ProjectUpdateManyWithWhereWithoutOrganizationInput[]
-    deleteMany?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
-  }
-
   export type BoardUpdateManyWithoutOrganizationNestedInput = {
     create?: XOR<BoardCreateWithoutOrganizationInput, BoardUncheckedCreateWithoutOrganizationInput> | BoardCreateWithoutOrganizationInput[] | BoardUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: BoardCreateOrConnectWithoutOrganizationInput | BoardCreateOrConnectWithoutOrganizationInput[]
@@ -9960,20 +8472,6 @@ export namespace Prisma {
     update?: UserUpdateWithWhereUniqueWithoutOrganizationInput | UserUpdateWithWhereUniqueWithoutOrganizationInput[]
     updateMany?: UserUpdateManyWithWhereWithoutOrganizationInput | UserUpdateManyWithWhereWithoutOrganizationInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
-  }
-
-  export type ProjectUncheckedUpdateManyWithoutOrganizationNestedInput = {
-    create?: XOR<ProjectCreateWithoutOrganizationInput, ProjectUncheckedCreateWithoutOrganizationInput> | ProjectCreateWithoutOrganizationInput[] | ProjectUncheckedCreateWithoutOrganizationInput[]
-    connectOrCreate?: ProjectCreateOrConnectWithoutOrganizationInput | ProjectCreateOrConnectWithoutOrganizationInput[]
-    upsert?: ProjectUpsertWithWhereUniqueWithoutOrganizationInput | ProjectUpsertWithWhereUniqueWithoutOrganizationInput[]
-    createMany?: ProjectCreateManyOrganizationInputEnvelope
-    set?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    disconnect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    delete?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    update?: ProjectUpdateWithWhereUniqueWithoutOrganizationInput | ProjectUpdateWithWhereUniqueWithoutOrganizationInput[]
-    updateMany?: ProjectUpdateManyWithWhereWithoutOrganizationInput | ProjectUpdateManyWithWhereWithoutOrganizationInput[]
-    deleteMany?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
   }
 
   export type BoardUncheckedUpdateManyWithoutOrganizationNestedInput = {
@@ -10126,72 +8624,10 @@ export namespace Prisma {
     deleteMany?: BoardScalarWhereInput | BoardScalarWhereInput[]
   }
 
-  export type OrganizationCreateNestedOneWithoutProjectsInput = {
-    create?: XOR<OrganizationCreateWithoutProjectsInput, OrganizationUncheckedCreateWithoutProjectsInput>
-    connectOrCreate?: OrganizationCreateOrConnectWithoutProjectsInput
-    connect?: OrganizationWhereUniqueInput
-  }
-
-  export type BoardCreateNestedManyWithoutProjectInput = {
-    create?: XOR<BoardCreateWithoutProjectInput, BoardUncheckedCreateWithoutProjectInput> | BoardCreateWithoutProjectInput[] | BoardUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: BoardCreateOrConnectWithoutProjectInput | BoardCreateOrConnectWithoutProjectInput[]
-    createMany?: BoardCreateManyProjectInputEnvelope
-    connect?: BoardWhereUniqueInput | BoardWhereUniqueInput[]
-  }
-
-  export type BoardUncheckedCreateNestedManyWithoutProjectInput = {
-    create?: XOR<BoardCreateWithoutProjectInput, BoardUncheckedCreateWithoutProjectInput> | BoardCreateWithoutProjectInput[] | BoardUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: BoardCreateOrConnectWithoutProjectInput | BoardCreateOrConnectWithoutProjectInput[]
-    createMany?: BoardCreateManyProjectInputEnvelope
-    connect?: BoardWhereUniqueInput | BoardWhereUniqueInput[]
-  }
-
-  export type OrganizationUpdateOneRequiredWithoutProjectsNestedInput = {
-    create?: XOR<OrganizationCreateWithoutProjectsInput, OrganizationUncheckedCreateWithoutProjectsInput>
-    connectOrCreate?: OrganizationCreateOrConnectWithoutProjectsInput
-    upsert?: OrganizationUpsertWithoutProjectsInput
-    connect?: OrganizationWhereUniqueInput
-    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutProjectsInput, OrganizationUpdateWithoutProjectsInput>, OrganizationUncheckedUpdateWithoutProjectsInput>
-  }
-
-  export type BoardUpdateManyWithoutProjectNestedInput = {
-    create?: XOR<BoardCreateWithoutProjectInput, BoardUncheckedCreateWithoutProjectInput> | BoardCreateWithoutProjectInput[] | BoardUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: BoardCreateOrConnectWithoutProjectInput | BoardCreateOrConnectWithoutProjectInput[]
-    upsert?: BoardUpsertWithWhereUniqueWithoutProjectInput | BoardUpsertWithWhereUniqueWithoutProjectInput[]
-    createMany?: BoardCreateManyProjectInputEnvelope
-    set?: BoardWhereUniqueInput | BoardWhereUniqueInput[]
-    disconnect?: BoardWhereUniqueInput | BoardWhereUniqueInput[]
-    delete?: BoardWhereUniqueInput | BoardWhereUniqueInput[]
-    connect?: BoardWhereUniqueInput | BoardWhereUniqueInput[]
-    update?: BoardUpdateWithWhereUniqueWithoutProjectInput | BoardUpdateWithWhereUniqueWithoutProjectInput[]
-    updateMany?: BoardUpdateManyWithWhereWithoutProjectInput | BoardUpdateManyWithWhereWithoutProjectInput[]
-    deleteMany?: BoardScalarWhereInput | BoardScalarWhereInput[]
-  }
-
-  export type BoardUncheckedUpdateManyWithoutProjectNestedInput = {
-    create?: XOR<BoardCreateWithoutProjectInput, BoardUncheckedCreateWithoutProjectInput> | BoardCreateWithoutProjectInput[] | BoardUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: BoardCreateOrConnectWithoutProjectInput | BoardCreateOrConnectWithoutProjectInput[]
-    upsert?: BoardUpsertWithWhereUniqueWithoutProjectInput | BoardUpsertWithWhereUniqueWithoutProjectInput[]
-    createMany?: BoardCreateManyProjectInputEnvelope
-    set?: BoardWhereUniqueInput | BoardWhereUniqueInput[]
-    disconnect?: BoardWhereUniqueInput | BoardWhereUniqueInput[]
-    delete?: BoardWhereUniqueInput | BoardWhereUniqueInput[]
-    connect?: BoardWhereUniqueInput | BoardWhereUniqueInput[]
-    update?: BoardUpdateWithWhereUniqueWithoutProjectInput | BoardUpdateWithWhereUniqueWithoutProjectInput[]
-    updateMany?: BoardUpdateManyWithWhereWithoutProjectInput | BoardUpdateManyWithWhereWithoutProjectInput[]
-    deleteMany?: BoardScalarWhereInput | BoardScalarWhereInput[]
-  }
-
   export type OrganizationCreateNestedOneWithoutBoardsInput = {
     create?: XOR<OrganizationCreateWithoutBoardsInput, OrganizationUncheckedCreateWithoutBoardsInput>
     connectOrCreate?: OrganizationCreateOrConnectWithoutBoardsInput
     connect?: OrganizationWhereUniqueInput
-  }
-
-  export type ProjectCreateNestedOneWithoutBoardsInput = {
-    create?: XOR<ProjectCreateWithoutBoardsInput, ProjectUncheckedCreateWithoutBoardsInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutBoardsInput
-    connect?: ProjectWhereUniqueInput
   }
 
   export type ColumnCreateNestedManyWithoutBoardInput = {
@@ -10226,14 +8662,6 @@ export namespace Prisma {
     upsert?: OrganizationUpsertWithoutBoardsInput
     connect?: OrganizationWhereUniqueInput
     update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutBoardsInput, OrganizationUpdateWithoutBoardsInput>, OrganizationUncheckedUpdateWithoutBoardsInput>
-  }
-
-  export type ProjectUpdateOneRequiredWithoutBoardsNestedInput = {
-    create?: XOR<ProjectCreateWithoutBoardsInput, ProjectUncheckedCreateWithoutBoardsInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutBoardsInput
-    upsert?: ProjectUpsertWithoutBoardsInput
-    connect?: ProjectWhereUniqueInput
-    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutBoardsInput, ProjectUpdateWithoutBoardsInput>, ProjectUncheckedUpdateWithoutBoardsInput>
   }
 
   export type ColumnUpdateManyWithoutBoardNestedInput = {
@@ -10638,39 +9066,12 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ProjectCreateWithoutOrganizationInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    boards?: BoardCreateNestedManyWithoutProjectInput
-  }
-
-  export type ProjectUncheckedCreateWithoutOrganizationInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    boards?: BoardUncheckedCreateNestedManyWithoutProjectInput
-  }
-
-  export type ProjectCreateOrConnectWithoutOrganizationInput = {
-    where: ProjectWhereUniqueInput
-    create: XOR<ProjectCreateWithoutOrganizationInput, ProjectUncheckedCreateWithoutOrganizationInput>
-  }
-
-  export type ProjectCreateManyOrganizationInputEnvelope = {
-    data: ProjectCreateManyOrganizationInput | ProjectCreateManyOrganizationInput[]
-    skipDuplicates?: boolean
-  }
-
   export type BoardCreateWithoutOrganizationInput = {
     id?: string
     name: string
     color: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    project: ProjectCreateNestedOneWithoutBoardsInput
     columns?: ColumnCreateNestedManyWithoutBoardInput
     members?: UserCreateNestedManyWithoutBoardsInput
   }
@@ -10679,7 +9080,6 @@ export namespace Prisma {
     id?: string
     name: string
     color: string
-    projectId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     columns?: ColumnUncheckedCreateNestedManyWithoutBoardInput
@@ -10726,33 +9126,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
   }
 
-  export type ProjectUpsertWithWhereUniqueWithoutOrganizationInput = {
-    where: ProjectWhereUniqueInput
-    update: XOR<ProjectUpdateWithoutOrganizationInput, ProjectUncheckedUpdateWithoutOrganizationInput>
-    create: XOR<ProjectCreateWithoutOrganizationInput, ProjectUncheckedCreateWithoutOrganizationInput>
-  }
-
-  export type ProjectUpdateWithWhereUniqueWithoutOrganizationInput = {
-    where: ProjectWhereUniqueInput
-    data: XOR<ProjectUpdateWithoutOrganizationInput, ProjectUncheckedUpdateWithoutOrganizationInput>
-  }
-
-  export type ProjectUpdateManyWithWhereWithoutOrganizationInput = {
-    where: ProjectScalarWhereInput
-    data: XOR<ProjectUpdateManyMutationInput, ProjectUncheckedUpdateManyWithoutOrganizationInput>
-  }
-
-  export type ProjectScalarWhereInput = {
-    AND?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
-    OR?: ProjectScalarWhereInput[]
-    NOT?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
-    id?: UuidFilter<"Project"> | string
-    name?: StringFilter<"Project"> | string
-    organizationId?: UuidFilter<"Project"> | string
-    createdAt?: DateTimeFilter<"Project"> | Date | string
-    updatedAt?: DateTimeFilter<"Project"> | Date | string
-  }
-
   export type BoardUpsertWithWhereUniqueWithoutOrganizationInput = {
     where: BoardWhereUniqueInput
     update: XOR<BoardUpdateWithoutOrganizationInput, BoardUncheckedUpdateWithoutOrganizationInput>
@@ -10777,7 +9150,6 @@ export namespace Prisma {
     name?: StringFilter<"Board"> | string
     color?: StringFilter<"Board"> | string
     organizationId?: UuidFilter<"Board"> | string
-    projectId?: UuidFilter<"Board"> | string
     createdAt?: DateTimeFilter<"Board"> | Date | string
     updatedAt?: DateTimeFilter<"Board"> | Date | string
   }
@@ -10787,7 +9159,6 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    projects?: ProjectCreateNestedManyWithoutOrganizationInput
     boards?: BoardCreateNestedManyWithoutOrganizationInput
   }
 
@@ -10796,7 +9167,6 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    projects?: ProjectUncheckedCreateNestedManyWithoutOrganizationInput
     boards?: BoardUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
@@ -10871,7 +9241,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     organization: OrganizationCreateNestedOneWithoutBoardsInput
-    project: ProjectCreateNestedOneWithoutBoardsInput
     columns?: ColumnCreateNestedManyWithoutBoardInput
   }
 
@@ -10880,7 +9249,6 @@ export namespace Prisma {
     name: string
     color: string
     organizationId: string
-    projectId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     columns?: ColumnUncheckedCreateNestedManyWithoutBoardInput
@@ -10907,7 +9275,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projects?: ProjectUpdateManyWithoutOrganizationNestedInput
     boards?: BoardUpdateManyWithoutOrganizationNestedInput
   }
 
@@ -10916,7 +9283,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projects?: ProjectUncheckedUpdateManyWithoutOrganizationNestedInput
     boards?: BoardUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
@@ -10982,113 +9348,12 @@ export namespace Prisma {
     data: XOR<BoardUpdateManyMutationInput, BoardUncheckedUpdateManyWithoutMembersInput>
   }
 
-  export type OrganizationCreateWithoutProjectsInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    users?: UserCreateNestedManyWithoutOrganizationInput
-    boards?: BoardCreateNestedManyWithoutOrganizationInput
-  }
-
-  export type OrganizationUncheckedCreateWithoutProjectsInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
-    boards?: BoardUncheckedCreateNestedManyWithoutOrganizationInput
-  }
-
-  export type OrganizationCreateOrConnectWithoutProjectsInput = {
-    where: OrganizationWhereUniqueInput
-    create: XOR<OrganizationCreateWithoutProjectsInput, OrganizationUncheckedCreateWithoutProjectsInput>
-  }
-
-  export type BoardCreateWithoutProjectInput = {
-    id?: string
-    name: string
-    color: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    organization: OrganizationCreateNestedOneWithoutBoardsInput
-    columns?: ColumnCreateNestedManyWithoutBoardInput
-    members?: UserCreateNestedManyWithoutBoardsInput
-  }
-
-  export type BoardUncheckedCreateWithoutProjectInput = {
-    id?: string
-    name: string
-    color: string
-    organizationId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    columns?: ColumnUncheckedCreateNestedManyWithoutBoardInput
-    members?: UserUncheckedCreateNestedManyWithoutBoardsInput
-  }
-
-  export type BoardCreateOrConnectWithoutProjectInput = {
-    where: BoardWhereUniqueInput
-    create: XOR<BoardCreateWithoutProjectInput, BoardUncheckedCreateWithoutProjectInput>
-  }
-
-  export type BoardCreateManyProjectInputEnvelope = {
-    data: BoardCreateManyProjectInput | BoardCreateManyProjectInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type OrganizationUpsertWithoutProjectsInput = {
-    update: XOR<OrganizationUpdateWithoutProjectsInput, OrganizationUncheckedUpdateWithoutProjectsInput>
-    create: XOR<OrganizationCreateWithoutProjectsInput, OrganizationUncheckedCreateWithoutProjectsInput>
-    where?: OrganizationWhereInput
-  }
-
-  export type OrganizationUpdateToOneWithWhereWithoutProjectsInput = {
-    where?: OrganizationWhereInput
-    data: XOR<OrganizationUpdateWithoutProjectsInput, OrganizationUncheckedUpdateWithoutProjectsInput>
-  }
-
-  export type OrganizationUpdateWithoutProjectsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUpdateManyWithoutOrganizationNestedInput
-    boards?: BoardUpdateManyWithoutOrganizationNestedInput
-  }
-
-  export type OrganizationUncheckedUpdateWithoutProjectsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
-    boards?: BoardUncheckedUpdateManyWithoutOrganizationNestedInput
-  }
-
-  export type BoardUpsertWithWhereUniqueWithoutProjectInput = {
-    where: BoardWhereUniqueInput
-    update: XOR<BoardUpdateWithoutProjectInput, BoardUncheckedUpdateWithoutProjectInput>
-    create: XOR<BoardCreateWithoutProjectInput, BoardUncheckedCreateWithoutProjectInput>
-  }
-
-  export type BoardUpdateWithWhereUniqueWithoutProjectInput = {
-    where: BoardWhereUniqueInput
-    data: XOR<BoardUpdateWithoutProjectInput, BoardUncheckedUpdateWithoutProjectInput>
-  }
-
-  export type BoardUpdateManyWithWhereWithoutProjectInput = {
-    where: BoardScalarWhereInput
-    data: XOR<BoardUpdateManyMutationInput, BoardUncheckedUpdateManyWithoutProjectInput>
-  }
-
   export type OrganizationCreateWithoutBoardsInput = {
     id?: string
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserCreateNestedManyWithoutOrganizationInput
-    projects?: ProjectCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutBoardsInput = {
@@ -11097,33 +9362,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
-    projects?: ProjectUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutBoardsInput = {
     where: OrganizationWhereUniqueInput
     create: XOR<OrganizationCreateWithoutBoardsInput, OrganizationUncheckedCreateWithoutBoardsInput>
-  }
-
-  export type ProjectCreateWithoutBoardsInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    organization: OrganizationCreateNestedOneWithoutProjectsInput
-  }
-
-  export type ProjectUncheckedCreateWithoutBoardsInput = {
-    id?: string
-    name: string
-    organizationId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ProjectCreateOrConnectWithoutBoardsInput = {
-    where: ProjectWhereUniqueInput
-    create: XOR<ProjectCreateWithoutBoardsInput, ProjectUncheckedCreateWithoutBoardsInput>
   }
 
   export type ColumnCreateWithoutBoardInput = {
@@ -11202,7 +9445,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateManyWithoutOrganizationNestedInput
-    projects?: ProjectUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutBoardsInput = {
@@ -11211,34 +9453,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
-    projects?: ProjectUncheckedUpdateManyWithoutOrganizationNestedInput
-  }
-
-  export type ProjectUpsertWithoutBoardsInput = {
-    update: XOR<ProjectUpdateWithoutBoardsInput, ProjectUncheckedUpdateWithoutBoardsInput>
-    create: XOR<ProjectCreateWithoutBoardsInput, ProjectUncheckedCreateWithoutBoardsInput>
-    where?: ProjectWhereInput
-  }
-
-  export type ProjectUpdateToOneWithWhereWithoutBoardsInput = {
-    where?: ProjectWhereInput
-    data: XOR<ProjectUpdateWithoutBoardsInput, ProjectUncheckedUpdateWithoutBoardsInput>
-  }
-
-  export type ProjectUpdateWithoutBoardsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    organization?: OrganizationUpdateOneRequiredWithoutProjectsNestedInput
-  }
-
-  export type ProjectUncheckedUpdateWithoutBoardsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    organizationId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ColumnUpsertWithWhereUniqueWithoutBoardInput = {
@@ -11292,7 +9506,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     organization: OrganizationCreateNestedOneWithoutBoardsInput
-    project: ProjectCreateNestedOneWithoutBoardsInput
     members?: UserCreateNestedManyWithoutBoardsInput
   }
 
@@ -11301,7 +9514,6 @@ export namespace Prisma {
     name: string
     color: string
     organizationId: string
-    projectId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: UserUncheckedCreateNestedManyWithoutBoardsInput
@@ -11362,7 +9574,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organization?: OrganizationUpdateOneRequiredWithoutBoardsNestedInput
-    project?: ProjectUpdateOneRequiredWithoutBoardsNestedInput
     members?: UserUpdateManyWithoutBoardsNestedInput
   }
 
@@ -11371,7 +9582,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     organizationId?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: UserUncheckedUpdateManyWithoutBoardsNestedInput
@@ -11570,18 +9780,10 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type ProjectCreateManyOrganizationInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type BoardCreateManyOrganizationInput = {
     id?: string
     name: string
     color: string
-    projectId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -11622,36 +9824,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProjectUpdateWithoutOrganizationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    boards?: BoardUpdateManyWithoutProjectNestedInput
-  }
-
-  export type ProjectUncheckedUpdateWithoutOrganizationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    boards?: BoardUncheckedUpdateManyWithoutProjectNestedInput
-  }
-
-  export type ProjectUncheckedUpdateManyWithoutOrganizationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type BoardUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneRequiredWithoutBoardsNestedInput
     columns?: ColumnUpdateManyWithoutBoardNestedInput
     members?: UserUpdateManyWithoutBoardsNestedInput
   }
@@ -11660,7 +9838,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     columns?: ColumnUncheckedUpdateManyWithoutBoardNestedInput
@@ -11671,7 +9848,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11758,7 +9934,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organization?: OrganizationUpdateOneRequiredWithoutBoardsNestedInput
-    project?: ProjectUpdateOneRequiredWithoutBoardsNestedInput
     columns?: ColumnUpdateManyWithoutBoardNestedInput
   }
 
@@ -11767,54 +9942,12 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     organizationId?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     columns?: ColumnUncheckedUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateManyWithoutMembersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
-    organizationId?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoardCreateManyProjectInput = {
-    id?: string
-    name: string
-    color: string
-    organizationId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type BoardUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    organization?: OrganizationUpdateOneRequiredWithoutBoardsNestedInput
-    columns?: ColumnUpdateManyWithoutBoardNestedInput
-    members?: UserUpdateManyWithoutBoardsNestedInput
-  }
-
-  export type BoardUncheckedUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
-    organizationId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    columns?: ColumnUncheckedUpdateManyWithoutBoardNestedInput
-    members?: UserUncheckedUpdateManyWithoutBoardsNestedInput
-  }
-
-  export type BoardUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string

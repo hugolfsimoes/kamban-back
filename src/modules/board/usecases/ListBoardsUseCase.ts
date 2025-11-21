@@ -1,13 +1,8 @@
 // src/modules/board/usecases/ListBoardsUseCase.ts
-import { IBoardRepository } from '../repositories/IBoardRepository';
+import { IBoardRepository, BoardDTO } from '../repositories/IBoardRepository';
 
 interface ListBoardsInput {
   organizationId: string;
-}
-
-interface BoardDTO {
-  id: string;
-  name: string;
 }
 
 export class ListBoardsUseCase {

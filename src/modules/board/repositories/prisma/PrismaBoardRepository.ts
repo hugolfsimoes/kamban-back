@@ -1,6 +1,6 @@
 
 import { PrismaClient } from '../../../../generated/prisma';
-import { IBoardRepository, BoardDTO } from '../IBoardRepository';
+import { IBoardRepository, BoardDTO, CreateBoardInput } from '../IBoardRepository';
 
 export class PrismaBoardRepository implements IBoardRepository {
   constructor(private prisma: PrismaClient) {}
@@ -8,7 +8,20 @@ export class PrismaBoardRepository implements IBoardRepository {
   async findManyByOrganization(organizationId: string): Promise<BoardDTO[]> {
     return this.prisma.board.findMany({
       where: { organizationId },
-      select: { id: true, name: true },
+      select: { id: true, name: true, color: true, organizationId: true },
     });
+  }
+
+  async create(input: CreateBoardInput): Promise<BoardDTO> {
+    const board = await this.prisma.board.create({
+      data: {
+        name: input.name,
+        color: input.color,
+        organizationId: input.organizationId,
+      },
+      select: { id: true, name: true, color: true, organizationId: true },
+    });
+
+    return board;
   }
 }

@@ -1,11 +1,12 @@
 
 import { prisma } from '../../../infrastructure/prisma';
 import { PrismaBoardRepository } from '../repositories/prisma/PrismaBoardRepository';
-import { ListBoardsUseCase } from '../usecases/ListBoardsUseCase';
+import { CreateBoardUseCase } from '../usecases/CreateBoardUseCase';
+import { CreateBoardInput } from '../repositories/IBoardRepository';
 
-export const createBoardService = async (organizationId: string, name: string) => {
+export const createBoardService = async (input: CreateBoardInput) => {
   const boardRepo = new PrismaBoardRepository(prisma);
-  const listBoardsUseCase = new ListBoardsUseCase(boardRepo);
+  const createBoardUseCase = new CreateBoardUseCase(boardRepo);
 
-  return listBoardsUseCase.execute({ organizationId });
+  return createBoardUseCase.execute(input);
 };
