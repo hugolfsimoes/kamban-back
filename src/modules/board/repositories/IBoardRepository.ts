@@ -15,4 +15,5 @@ export interface CreateBoardInput {
 export interface IBoardRepository {
   findManyByOrganization(organizationId: string): Promise<BoardDTO[]>;
   create(input: CreateBoardInput): Promise<BoardDTO>;
+  findById(boardId: string): Promise<BoardDTO | null>;
 }

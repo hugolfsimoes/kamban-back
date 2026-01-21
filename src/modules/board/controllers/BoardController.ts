@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { AuthRequest } from '../../auth/middleware/authMiddleware';
 import { listBoardsService } from '../services/listBoards';
 import { createBoardService } from '../services/createBoardService';
+import { getBoardByIdService } from '../services/getBoardByIdService';
 
 export default class BoardController {
   async list(
@@ -23,7 +24,8 @@ export default class BoardController {
   async getById(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
-      res.json({ message: `Board with id ${id}` });
+      const board = await getBoardByIdService(id);
+      res.status(200).json({ board });
     } catch (error) {
       next(error);
     }
@@ -32,8 +34,8 @@ export default class BoardController {
   async create(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const { name, color } = req.body;
-      
-      
+
+
       const { organizationId } = req.user!;
 
       if (!name || !color) {
