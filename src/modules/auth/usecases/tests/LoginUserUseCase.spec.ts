@@ -1,4 +1,3 @@
-// src/modules/auth/usecases/__tests__/LoginUserUseCase.spec.ts
 import { LoginUserUseCase, LoginUserInput } from '../LoginUserUseCase';
 import { IUserRepository } from '../../../user/repositories/IUserRepository';
 import { User } from '../../../user/entities/User';

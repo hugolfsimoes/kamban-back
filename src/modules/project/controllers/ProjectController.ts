@@ -1,7 +1,7 @@
-// src/modules/board/controllers/BoardController.ts
 import { Request, Response, NextFunction } from 'express';
 import { AuthRequest } from '../../auth/middleware/authMiddleware';
-import { listBoardsService } from '../services/listBoards';
+import { listBoardsService } from '../services/listProjects';
+
 
 export default class BoardController {
   async list(
@@ -19,7 +19,7 @@ export default class BoardController {
     }
   }
 
-  async getById(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async getInfoBoardByBoardId(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
       res.json({ message: `Board with id ${id}` });

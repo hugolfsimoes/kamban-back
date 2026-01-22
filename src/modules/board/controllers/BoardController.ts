@@ -1,9 +1,8 @@
-// src/modules/board/controllers/BoardController.ts
 import { Request, Response, NextFunction } from 'express';
 import { AuthRequest } from '../../auth/middleware/authMiddleware';
 import { listBoardsService } from '../services/listBoards';
 import { createBoardService } from '../services/createBoardService';
-import { getBoardByIdService } from '../services/getBoardByIdService';
+import { getInfoBoardByIdService } from '../services/getBoardByIdService';
 
 export default class BoardController {
   async list(
@@ -21,10 +20,10 @@ export default class BoardController {
     }
   }
 
-  async getById(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async getInfoBoardByBoardId(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
-      const board = await getBoardByIdService(id);
+      const board = await getInfoBoardByIdService(id);
       res.status(200).json({ board });
     } catch (error) {
       next(error);

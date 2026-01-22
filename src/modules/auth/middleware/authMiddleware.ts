@@ -1,4 +1,3 @@
-// src/shared/middleware/authMiddleware.ts
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { TokenPayload, verifyToken } from '../../../shared/adapters/jwtAdapter';
 
@@ -14,7 +13,7 @@ export const authMiddleware: RequestHandler = (req, res, next) => {
     return;
   }
 
-  const [ , token ] = authHeader.split(' ');
+  const [, token] = authHeader.split(' ');
   const { valid, expired, decoded } = verifyToken<TokenPayload>(token);
 
   if (!valid || !decoded) {

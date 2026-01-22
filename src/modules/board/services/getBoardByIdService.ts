@@ -1,11 +1,15 @@
 
 import { prisma } from '../../../infrastructure/prisma';
 import { PrismaBoardRepository } from '../repositories/prisma/PrismaBoardRepository';
-import { GetBoardByIdServiceUseCase } from '../usecases/getBoardByIdServiceUseCase';
+import { PrismaCardRepository } from '../repositories/prisma/PrismaCardRepository';
+import { PrismaColumnRepository } from '../repositories/prisma/PrismaColumnRepository';
+import { GetInfoBoardByIdUseCase } from '../usecases/getBoardByIdServiceUseCase';
 
-export const getBoardByIdService = async (boardId: string) => {
+export const getInfoBoardByIdService = async (boardId: string) => {
   const boardRepo = new PrismaBoardRepository(prisma);
-  const getBoardByIdServiceUseCase = new GetBoardByIdServiceUseCase(boardRepo);
+  const columnRepo = new PrismaColumnRepository(prisma);
+  const cardRepo = new PrismaCardRepository(prisma);
+  const getInfoBoardByIdServiceUseCase = new GetInfoBoardByIdUseCase(boardRepo, columnRepo, cardRepo);
 
-  return getBoardByIdServiceUseCase.execute({ boardId });
+  return getInfoBoardByIdServiceUseCase.execute({ boardId });
 };

@@ -1,4 +1,3 @@
-// src/shared/adapters/jwtAdapter.ts
 import jwt, { JwtPayload, VerifyErrors } from 'jsonwebtoken';
 
 const SECRET = process.env.JWT_SECRET || 'defaultSecret';
