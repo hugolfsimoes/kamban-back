@@ -7,3 +7,4 @@ export interface ColumnDTO {
 export interface IColumnRepository {
   findManyByBoardId(boardId: string): Promise<ColumnDTO[]>;
 }
+

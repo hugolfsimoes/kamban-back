@@ -1,13 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import { AuthRequest } from '../../auth/middleware/authMiddleware';
+import { BoardListItemDTO } from '../repositories/IBoardRepository';
 import { listBoardsService } from '../services/listBoards';
 import { createBoardService } from '../services/createBoardService';
 import { getInfoBoardByIdService } from '../services/getBoardByIdService';
+import { updateBoardService } from '../services/updateBoardService';
+import { deleteBoardService } from '../services/deleteBoardService';
 
 export default class BoardController {
   async list(
     req: AuthRequest,
-    res: Response<{ boards: { name: string; id: string; }[]; }>,
+    res: Response<{ boards: BoardListItemDTO[]; }>,
     next: NextFunction
   ): Promise<void> {
     try {
@@ -54,21 +57,39 @@ export default class BoardController {
     }
   }
 
-  async update(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async update(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
-      res.json({ message: `Board ${id} updated` });
+      const { name, color } = req.body;
+      const { organizationId } = req.user!;
+
+      if (!name && !color) {
+        res.status(400).json({ error: 'É necessário informar name ou color para atualizar' });
+        return;
+      }
+
+      const board = await updateBoardService({
+        boardId: id,
+        organizationId,
+        data: { ...(name !== undefined && { name }), ...(color !== undefined && { color }) },
+      });
+
+      res.status(200).json({ board });
     } catch (error) {
       next(error);
     }
   }
 
-  async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async delete(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
-      res.json({ message: `Board ${id} deleted` });
+      const { organizationId } = req.user!;
+
+      await deleteBoardService({ boardId: id, organizationId });
+
+      res.status(204).send();
     } catch (error) {
       next(error);
     }
-  };
+  }
 }

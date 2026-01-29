@@ -3,6 +3,12 @@ export interface BoardDTO {
   name: string;
   color: string;
   organizationId: string;
+  updatedAt: Date;
+}
+
+export interface BoardListItemDTO extends BoardDTO {
+  columnsCount: number;
+  cardsCount: number;
 }
 
 export interface CreateBoardInput {
@@ -11,8 +17,16 @@ export interface CreateBoardInput {
   organizationId: string;
 }
 
+export interface UpdateBoardInput {
+  name?: string;
+  color?: string;
+}
+
 export interface IBoardRepository {
-  findManyByOrganization(organizationId: string): Promise<BoardDTO[]>;
+  findManyByOrganization(organizationId: string): Promise<BoardListItemDTO[]>;
   create(input: CreateBoardInput): Promise<BoardDTO>;
   findById(boardId: string): Promise<BoardDTO | null>;
+  update(boardId: string, input: UpdateBoardInput): Promise<BoardDTO>;
+  delete(boardId: string): Promise<void>;
 }
+

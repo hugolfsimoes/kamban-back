@@ -4,10 +4,10 @@ import ColumnController from './controllers/ColumnController';
 const columnRouter = Router();
 const columnController = new ColumnController();
 
-columnRouter.post('/', (req, res) => columnController.create(req, res));
-columnRouter.get('/', (req, res) => columnController.list(req, res));
-columnRouter.get('/:id', (req, res) => columnController.getById(req, res));
-columnRouter.put('/:id', (req, res) => columnController.update(req, res));
-columnRouter.delete('/:id', (req, res) => columnController.delete(req, res));
+columnRouter.post('/', (req, res, next) => columnController.create(req, res, next));
+columnRouter.get('/', (req, res, next) => columnController.list(req, res, next));
+columnRouter.get('/:id', (req, res, next) => columnController.getById(req, res, next));
+columnRouter.put('/:id', (req, res, next) => columnController.update(req, res, next));
+columnRouter.delete('/:id', (req, res, next) => columnController.delete(req, res, next));
 
 export default columnRouter;
