@@ -6,7 +6,9 @@ import { CreateColumnInput } from '../repositories/IColumnRepository';
 
 export interface CreateColumnServiceInput {
   organizationId: string;
-  data: CreateColumnInput;
+  data: {
+    title: string; boardId: string;
+  };
 }
 
 export const createColumnService = async (input: CreateColumnServiceInput) => {

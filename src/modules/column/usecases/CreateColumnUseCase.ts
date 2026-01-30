@@ -8,7 +8,7 @@ import { NotFoundError } from '../error/NotFoundError';
 
 export interface CreateColumnUseCaseInput {
   organizationId: string;
-  data: CreateColumnInput;
+  data: { title: string; boardId: string; };
 }
 
 export class CreateColumnUseCase {
@@ -28,6 +28,10 @@ export class CreateColumnUseCase {
       throw new NotFoundError('Board não encontrado');
     }
 
-    return this.columnRepo.create(input.data);
+    const allColumns = await this.columnRepo.findManyByBoardId(board.id);
+
+    const position = allColumns.length || 0;
+
+    return this.columnRepo.create({ ...input.data, position });
   }
 }

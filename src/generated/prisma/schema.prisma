@@ -58,6 +58,8 @@ model Column {
   cards     Card[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([boardId, position])
 }
 
 model Card {
@@ -72,4 +74,6 @@ model Card {
   assignees   User[]   @relation("CardAssignees")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@unique([columnId, position])
 }

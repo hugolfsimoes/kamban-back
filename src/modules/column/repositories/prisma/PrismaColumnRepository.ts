@@ -11,7 +11,7 @@ export class PrismaColumnRepository implements IColumnRepository {
 
   async findManyByBoardId(boardId: string): Promise<ColumnDTO[]> {
     return this.prisma.column.findMany({
-      where: { boardId },
+      where: { boardId, },
       select: { id: true, title: true, boardId: true, position: true, updatedAt: true },
       orderBy: { position: 'asc' },
     });

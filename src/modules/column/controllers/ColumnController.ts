@@ -6,6 +6,7 @@ import { updateColumnService } from '../services/updateColumnService';
 import { deleteColumnService } from '../services/deleteColumnService';
 import { listColumnsService } from '../services/listColumnsService';
 import { getColumnByIdService } from '../services/getColumnByIdService';
+import { orderColumnPositionService } from '../services/orderColumnPositionService';
 
 export default class ColumnController {
   async list(req: AuthRequest, res: Response<{ columns: ColumnDTO[]; }>, next: NextFunction): Promise<void> {
@@ -34,17 +35,17 @@ export default class ColumnController {
 
   async create(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { title, boardId, position } = req.body;
+      const { title, boardId } = req.body;
       const { organizationId } = req.user!;
 
-      if (!title || !boardId || position === undefined) {
+      if (!title || !boardId) {
         res.status(400).json({ error: 'Campos obrigatórios: title, boardId, position' });
         return;
       }
 
       const column = await createColumnService({
         organizationId,
-        data: { title, boardId, position: Number(position) },
+        data: { title, boardId },
       });
       res.status(201).json({ column });
     } catch (error) {
@@ -84,6 +85,28 @@ export default class ColumnController {
 
       await deleteColumnService({ columnId: id, organizationId });
       res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async orderPosition(req: AuthRequest, res: Response<{ columns: ColumnDTO[]; } | { error: string; }>, next: NextFunction): Promise<void> {
+    try {
+      const { boardId, sourcePosition, destinationPosition } = req.body;
+      const { organizationId } = req.user!;
+
+      if (boardId === undefined || sourcePosition === undefined || destinationPosition === undefined) {
+        res.status(400).json({ error: 'Campos obrigatórios: boardId, sourcePosition, destinationPosition' });
+        return;
+      }
+
+      const columns = await orderColumnPositionService({
+        boardId,
+        organizationId,
+        sourcePosition: Number(sourcePosition),
+        destinationPosition: Number(destinationPosition),
+      });
+      res.status(200).json({ columns });
     } catch (error) {
       next(error);
     }
