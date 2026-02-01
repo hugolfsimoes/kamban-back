@@ -1,25 +1,24 @@
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { CreateUserUseCase, CreateUserInput } from '../CreateUserUseCase';
 import { IUserRepository } from '../../repositories/IUserRepository';
 import { User } from '../../entities/User';
 import { UserRole } from '../../../../generated/prisma';
 
-
-
-const mockUserRepo: jest.Mocked<IUserRepository> = {
-  findByEmail: jest.fn(),
-  createUser: jest.fn(),
+const mockUserRepo: IUserRepository = {
+  findByEmail: vi.fn(),
+  createUser: vi.fn(),
 };
 
 describe('CreateUserUseCase', () => {
   let useCase: CreateUserUseCase;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     useCase = new CreateUserUseCase(mockUserRepo);
   });
 
-  it('should throw if email already exists', async () => {
-    mockUserRepo.findByEmail.mockResolvedValue(
+  it('deve lançar erro se email já existe', async () => {
+    vi.mocked(mockUserRepo.findByEmail).mockResolvedValue(
       new User({ id: '1', name: 'x', email: 'a@b.com', password: 'pwd', role: UserRole.ADMIN, organizationId: 'org1' })
     );
 
@@ -31,19 +30,14 @@ describe('CreateUserUseCase', () => {
       organizationId: 'org1',
     };
 
-
     await expect(useCase.execute(input)).rejects.toThrow('Email already exists');
     expect(mockUserRepo.findByEmail).toHaveBeenCalledWith('a@b.com');
     expect(mockUserRepo.createUser).not.toHaveBeenCalled();
   });
 
-  it('should hash password and create user', async () => {
-
-    mockUserRepo.findByEmail.mockResolvedValue(null);
-
-
-    mockUserRepo.createUser.mockImplementation(async (data) => {
-
+  it('deve fazer hash da senha e criar usuário', async () => {
+    vi.mocked(mockUserRepo.findByEmail).mockResolvedValue(null);
+    vi.mocked(mockUserRepo.createUser).mockImplementation(async (data) => {
       return new User({
         id: 'new-id',
         ...data,
@@ -60,9 +54,7 @@ describe('CreateUserUseCase', () => {
       organizationId: 'org1',
     };
 
-
     const user = await useCase.execute(input);
-
 
     expect(user).toBeInstanceOf(User);
     expect(user.id).toBe('new-id');

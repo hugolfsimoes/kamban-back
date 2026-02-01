@@ -1,9 +1,8 @@
-
-import { PrismaClient } from '../../../../generated/prisma';
+import { PrismaClientOrTransaction } from '../../../../infrastructure/prisma';
 import { IBoardRepository, BoardDTO, BoardListItemDTO, CreateBoardInput, UpdateBoardInput } from '../IBoardRepository';
 
 export class PrismaBoardRepository implements IBoardRepository {
-  constructor(private prisma: PrismaClient) {}
+  constructor(private prisma: PrismaClientOrTransaction) {}
 
   async findManyByOrganization(organizationId: string): Promise<BoardListItemDTO[]> {
     const boards = await this.prisma.board.findMany({

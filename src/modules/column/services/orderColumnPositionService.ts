@@ -11,9 +11,11 @@ export interface OrderColumnPositionServiceInput {
 }
 
 export const orderColumnPositionService = async (input: OrderColumnPositionServiceInput) => {
-  const boardRepo = new PrismaBoardRepository(prisma);
-  const columnRepo = new PrismaColumnRepository(prisma);
-  const orderColumnPositionUseCase = new OrderColumnPositionUseCase(boardRepo, columnRepo);
+  return prisma.$transaction(async (tx) => {
+    const boardRepo = new PrismaBoardRepository(tx);
+    const columnRepo = new PrismaColumnRepository(tx);
+    const orderColumnPositionUseCase = new OrderColumnPositionUseCase(boardRepo, columnRepo);
 
-  return orderColumnPositionUseCase.execute(input);
+    return orderColumnPositionUseCase.execute(input);
+  });
 };

@@ -2,13 +2,15 @@ import { IBoardRepository, BoardDTO } from '../repositories/IBoardRepository';
 import { CardDTO, ICardRepository } from '../repositories/ICardRepository';
 import { IColumnRepository, ColumnDTO } from '../repositories/IColumnRepository';
 
-interface GetInfoBoardByIdInput {
+export interface GetInfoBoardByIdInput {
   boardId: string;
 }
-interface ColumnWithCardsDTO extends ColumnDTO {
+
+export interface ColumnWithCardsDTO extends ColumnDTO {
   cards: CardDTO[];
 }
-interface BoardWithColumnsDTO extends BoardDTO {
+
+export interface BoardWithColumnsDTO extends BoardDTO {
   columns: ColumnWithCardsDTO[];
 }
 
@@ -17,7 +19,7 @@ export class GetInfoBoardByIdUseCase {
     private readonly boardRepo: IBoardRepository,
     private readonly columnRepo: IColumnRepository,
     private readonly cardRepo: ICardRepository,
-  ) { }
+  ) {}
 
   async execute({ boardId }: GetInfoBoardByIdInput): Promise<BoardWithColumnsDTO | null> {
     const board = await this.boardRepo.findById(boardId);

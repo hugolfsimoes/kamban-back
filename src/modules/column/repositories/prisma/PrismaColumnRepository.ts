@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../../../generated/prisma';
+import { PrismaClientOrTransaction } from '../../../../infrastructure/prisma';
 import {
   IColumnRepository,
   ColumnDTO,
@@ -7,7 +7,7 @@ import {
 } from '../IColumnRepository';
 
 export class PrismaColumnRepository implements IColumnRepository {
-  constructor(private prisma: PrismaClient) {}
+  constructor(private prisma: PrismaClientOrTransaction) {}
 
   async findManyByBoardId(boardId: string): Promise<ColumnDTO[]> {
     return this.prisma.column.findMany({

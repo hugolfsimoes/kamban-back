@@ -6149,7 +6149,7 @@ export namespace Prisma {
 
   export type CardGroupByOutputType = {
     id: string
-    title: string
+    title: string | null
     description: string | null
     columnId: string
     position: number
@@ -6254,7 +6254,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      title: string
+      title: string | null
       description: string | null
       columnId: string
       position: number
@@ -7579,7 +7579,7 @@ export namespace Prisma {
     OR?: CardWhereInput[]
     NOT?: CardWhereInput | CardWhereInput[]
     id?: UuidFilter<"Card"> | string
-    title?: StringFilter<"Card"> | string
+    title?: StringNullableFilter<"Card"> | string | null
     description?: StringNullableFilter<"Card"> | string | null
     columnId?: UuidFilter<"Card"> | string
     position?: IntFilter<"Card"> | number
@@ -7593,7 +7593,7 @@ export namespace Prisma {
 
   export type CardOrderByWithRelationInput = {
     id?: SortOrder
-    title?: SortOrder
+    title?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     columnId?: SortOrder
     position?: SortOrder
@@ -7610,7 +7610,7 @@ export namespace Prisma {
     AND?: CardWhereInput | CardWhereInput[]
     OR?: CardWhereInput[]
     NOT?: CardWhereInput | CardWhereInput[]
-    title?: StringFilter<"Card"> | string
+    title?: StringNullableFilter<"Card"> | string | null
     description?: StringNullableFilter<"Card"> | string | null
     columnId?: UuidFilter<"Card"> | string
     position?: IntFilter<"Card"> | number
@@ -7624,7 +7624,7 @@ export namespace Prisma {
 
   export type CardOrderByWithAggregationInput = {
     id?: SortOrder
-    title?: SortOrder
+    title?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     columnId?: SortOrder
     position?: SortOrder
@@ -7643,7 +7643,7 @@ export namespace Prisma {
     OR?: CardScalarWhereWithAggregatesInput[]
     NOT?: CardScalarWhereWithAggregatesInput | CardScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Card"> | string
-    title?: StringWithAggregatesFilter<"Card"> | string
+    title?: StringNullableWithAggregatesFilter<"Card"> | string | null
     description?: StringNullableWithAggregatesFilter<"Card"> | string | null
     columnId?: UuidWithAggregatesFilter<"Card"> | string
     position?: IntWithAggregatesFilter<"Card"> | number
@@ -7935,7 +7935,7 @@ export namespace Prisma {
 
   export type CardCreateInput = {
     id?: string
-    title: string
+    title?: string | null
     description?: string | null
     position: number
     createdAt?: Date | string
@@ -7947,7 +7947,7 @@ export namespace Prisma {
 
   export type CardUncheckedCreateInput = {
     id?: string
-    title: string
+    title?: string | null
     description?: string | null
     columnId: string
     position: number
@@ -7959,7 +7959,7 @@ export namespace Prisma {
 
   export type CardUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7971,7 +7971,7 @@ export namespace Prisma {
 
   export type CardUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     columnId?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
@@ -7983,7 +7983,7 @@ export namespace Prisma {
 
   export type CardCreateManyInput = {
     id?: string
-    title: string
+    title?: string | null
     description?: string | null
     columnId: string
     position: number
@@ -7994,7 +7994,7 @@ export namespace Prisma {
 
   export type CardUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8003,7 +8003,7 @@ export namespace Prisma {
 
   export type CardUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     columnId?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
@@ -9177,7 +9177,7 @@ export namespace Prisma {
 
   export type CardCreateWithoutCreatorInput = {
     id?: string
-    title: string
+    title?: string | null
     description?: string | null
     position: number
     createdAt?: Date | string
@@ -9188,7 +9188,7 @@ export namespace Prisma {
 
   export type CardUncheckedCreateWithoutCreatorInput = {
     id?: string
-    title: string
+    title?: string | null
     description?: string | null
     columnId: string
     position: number
@@ -9209,7 +9209,7 @@ export namespace Prisma {
 
   export type CardCreateWithoutAssigneesInput = {
     id?: string
-    title: string
+    title?: string | null
     description?: string | null
     position: number
     createdAt?: Date | string
@@ -9220,7 +9220,7 @@ export namespace Prisma {
 
   export type CardUncheckedCreateWithoutAssigneesInput = {
     id?: string
-    title: string
+    title?: string | null
     description?: string | null
     columnId: string
     position: number
@@ -9307,7 +9307,7 @@ export namespace Prisma {
     OR?: CardScalarWhereInput[]
     NOT?: CardScalarWhereInput | CardScalarWhereInput[]
     id?: UuidFilter<"Card"> | string
-    title?: StringFilter<"Card"> | string
+    title?: StringNullableFilter<"Card"> | string | null
     description?: StringNullableFilter<"Card"> | string | null
     columnId?: UuidFilter<"Card"> | string
     position?: IntFilter<"Card"> | number
@@ -9526,7 +9526,7 @@ export namespace Prisma {
 
   export type CardCreateWithoutColumnInput = {
     id?: string
-    title: string
+    title?: string | null
     description?: string | null
     position: number
     createdAt?: Date | string
@@ -9537,7 +9537,7 @@ export namespace Prisma {
 
   export type CardUncheckedCreateWithoutColumnInput = {
     id?: string
-    title: string
+    title?: string | null
     description?: string | null
     position: number
     creatorId: string
@@ -9854,7 +9854,7 @@ export namespace Prisma {
 
   export type CardCreateManyCreatorInput = {
     id?: string
-    title: string
+    title?: string | null
     description?: string | null
     columnId: string
     position: number
@@ -9864,7 +9864,7 @@ export namespace Prisma {
 
   export type CardUpdateWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9875,7 +9875,7 @@ export namespace Prisma {
 
   export type CardUncheckedUpdateWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     columnId?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
@@ -9886,7 +9886,7 @@ export namespace Prisma {
 
   export type CardUncheckedUpdateManyWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     columnId?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
@@ -9896,7 +9896,7 @@ export namespace Prisma {
 
   export type CardUpdateWithoutAssigneesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9907,7 +9907,7 @@ export namespace Prisma {
 
   export type CardUncheckedUpdateWithoutAssigneesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     columnId?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
@@ -9918,7 +9918,7 @@ export namespace Prisma {
 
   export type CardUncheckedUpdateManyWithoutAssigneesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     columnId?: StringFieldUpdateOperationsInput | string
     position?: IntFieldUpdateOperationsInput | number
@@ -10029,7 +10029,7 @@ export namespace Prisma {
 
   export type CardCreateManyColumnInput = {
     id?: string
-    title: string
+    title?: string | null
     description?: string | null
     position: number
     creatorId: string
@@ -10039,7 +10039,7 @@ export namespace Prisma {
 
   export type CardUpdateWithoutColumnInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10050,7 +10050,7 @@ export namespace Prisma {
 
   export type CardUncheckedUpdateWithoutColumnInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     position?: IntFieldUpdateOperationsInput | number
     creatorId?: StringFieldUpdateOperationsInput | string
@@ -10061,7 +10061,7 @@ export namespace Prisma {
 
   export type CardUncheckedUpdateManyWithoutColumnInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     position?: IntFieldUpdateOperationsInput | number
     creatorId?: StringFieldUpdateOperationsInput | string

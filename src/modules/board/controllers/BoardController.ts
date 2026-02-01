@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { AuthRequest } from '../../auth/middleware/authMiddleware';
 import { BoardListItemDTO } from '../repositories/IBoardRepository';
+import { BoardWithColumnsDTO } from '../usecases/getBoardByIdServiceUseCase';
 import { listBoardsService } from '../services/listBoards';
 import { createBoardService } from '../services/createBoardService';
 import { getInfoBoardByIdService } from '../services/getBoardByIdService';
@@ -23,7 +24,11 @@ export default class BoardController {
     }
   }
 
-  async getInfoBoardByBoardId(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async getInfoBoardByBoardId(
+    req: Request,
+    res: Response<{ board: BoardWithColumnsDTO | null; }>,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const { id } = req.params;
       const board = await getInfoBoardByIdService(id);

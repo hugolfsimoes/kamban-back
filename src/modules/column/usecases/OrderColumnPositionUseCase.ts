@@ -4,7 +4,7 @@ import {
   ColumnDTO,
 } from '../repositories/IColumnRepository';
 import { NotFoundError } from '../error/NotFoundError';
-import { reorderPositions } from '../../../utils/reorderPositions';
+import { reorderPositions } from '../utils/reorderPositions';
 
 export interface OrderColumnPositionUseCaseInput {
   boardId: string;
