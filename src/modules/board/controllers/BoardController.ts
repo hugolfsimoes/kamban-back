@@ -31,7 +31,7 @@ export default class BoardController {
   ): Promise<void> {
     try {
       const { id } = req.params;
-      const board = await getInfoBoardByIdService(id);
+      const board = await getInfoBoardByIdService(id as string);
       res.status(200).json({ board });
     } catch (error) {
       next(error);
@@ -74,7 +74,7 @@ export default class BoardController {
       }
 
       const board = await updateBoardService({
-        boardId: id,
+        boardId: id as string,
         organizationId,
         data: { ...(name !== undefined && { name }), ...(color !== undefined && { color }) },
       });
@@ -90,7 +90,7 @@ export default class BoardController {
       const { id } = req.params;
       const { organizationId } = req.user!;
 
-      await deleteBoardService({ boardId: id, organizationId });
+      await deleteBoardService({ boardId: id as string, organizationId });
 
       res.status(204).send();
     } catch (error) {

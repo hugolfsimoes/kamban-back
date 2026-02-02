@@ -52,7 +52,7 @@ export default class CardController {
       const { id } = req.params;
       const { organizationId } = req.user!;
 
-      const card = await getCardByIdService({ cardId: id, organizationId });
+      const card = await getCardByIdService({ cardId: id as string, organizationId });
       res.status(200).json({ card });
     } catch (error) {
       next(error);
@@ -71,7 +71,7 @@ export default class CardController {
       }
 
       const card = await updateCardService({
-        cardId: id,
+        cardId: id as string,
         organizationId,
         data: {
           ...(title !== undefined && { title }),
@@ -91,7 +91,7 @@ export default class CardController {
       const { id } = req.params;
       const { organizationId } = req.user!;
 
-      await deleteCardService({ cardId: id, organizationId });
+      await deleteCardService({ cardId: id as string, organizationId });
       res.status(204).send();
     } catch (error) {
       next(error);
@@ -110,7 +110,7 @@ export default class CardController {
       }
 
       const card = await moveCardService({
-        cardId: id,
+        cardId: id as string,
         organizationId,
         columnId,
         position: Number(position),

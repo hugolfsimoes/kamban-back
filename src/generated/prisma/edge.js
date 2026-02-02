@@ -177,7 +177,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\User\\Desktop\\Hugo\\Projetos\\kambam\\kamban-back\\src\\generated\\prisma",
+      "value": "/home/hugo/projects/kanban/kamban-back/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -186,12 +186,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\User\\Desktop\\Hugo\\Projetos\\kambam\\kamban-back\\prisma\\schema.prisma",
+    "sourceFilePath": "/home/hugo/projects/kanban/kamban-back/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

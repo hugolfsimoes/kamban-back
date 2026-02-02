@@ -9,18 +9,17 @@ export interface TokenPayload extends JwtPayload {
 }
 
 export function signToken(payload: TokenPayload): string {
-  return jwt.sign(
-    payload,
-    SECRET,
-    { expiresIn: '24h' }
-  );
+  return jwt.sign(payload, SECRET, {
+    expiresIn: '24h',
+    algorithm: 'HS256',
+  });
 }
 
 export function verifyToken<T extends JwtPayload = JwtPayload>(
   token: string
 ): { valid: boolean; expired: boolean; decoded?: T; } {
   try {
-    const decoded = jwt.verify(token, SECRET) as T;
+    const decoded = jwt.verify(token, SECRET, { algorithms: [ 'HS256' ] }) as T;
     return { valid: true, expired: false, decoded };
   } catch (err) {
     const error = err as VerifyErrors;

@@ -26,7 +26,7 @@ export default class ColumnController {
       const { id } = req.params;
       const { organizationId } = req.user!;
 
-      const column = await getColumnByIdService({ columnId: id, organizationId });
+      const column = await getColumnByIdService({ columnId: id as string, organizationId });
       res.status(200).json({ column });
     } catch (error) {
       next(error);
@@ -65,7 +65,7 @@ export default class ColumnController {
       }
 
       const column = await updateColumnService({
-        columnId: id,
+        columnId: id as string,
         organizationId,
         data: {
           ...(title !== undefined && { title }),
@@ -83,7 +83,7 @@ export default class ColumnController {
       const { id } = req.params;
       const { organizationId } = req.user!;
 
-      await deleteColumnService({ columnId: id, organizationId });
+      await deleteColumnService({ columnId: id as string, organizationId });
       res.status(204).send();
     } catch (error) {
       next(error);
